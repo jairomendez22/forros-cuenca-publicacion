@@ -1,0 +1,60 @@
+/* Intro corta de la portada. Solo actúa con html.intro-on (lo pone js/intro-gate.js). */
+html.intro-on,html.intro-on body{overflow:hidden}
+html.intro-on body::before{position:fixed;z-index:1999;inset:0;background:#060607;content:""}
+.intro{--i-bg:#060607;--i-red:#e50914;--i-txt:#f4f4f5;--i-mute:#9a9ca5;--i-mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono","DejaVu Sans Mono",monospace;position:fixed;z-index:2000;inset:0;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse 70% 55% at 50% 50%,#15080a 0,var(--i-bg) 70%);color:var(--i-txt);font-family:"Oswald","Arial Narrow",sans-serif;-webkit-font-smoothing:antialiased;contain:strict;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+.intro *{box-sizing:border-box}
+.intro p{margin:0}
+.intro .dot{color:var(--i-red);text-shadow:0 0 18px #e50914b3}
+.intro>*{grid-area:1/1}
+
+/* Marco, HUD y grano */
+.intro-grain{position:absolute;inset:-50%;opacity:.07;pointer-events:none;background-size:160px 160px;animation:intro-grain .5s steps(4) infinite}
+.intro-lite .intro-grain{animation:none}
+@keyframes intro-grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+.intro-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,#000c 100%)}
+.intro-corner{position:absolute;width:22px;height:22px;border:0 solid #ffffff59;pointer-events:none}
+.intro-corner.tl{top:calc(12px + env(safe-area-inset-top));left:12px;border-top-width:1px;border-left-width:1px}
+.intro-corner.tr{top:calc(12px + env(safe-area-inset-top));right:12px;border-top-width:1px;border-right-width:1px}
+.intro-corner.bl{bottom:calc(12px + env(safe-area-inset-bottom));left:12px;border-bottom-width:1px;border-left-width:1px}
+.intro-corner.br{right:12px;bottom:calc(12px + env(safe-area-inset-bottom));border-right-width:1px;border-bottom-width:1px}
+.intro-hud{position:absolute;top:calc(20px + env(safe-area-inset-top));left:22px;color:var(--i-mute);font:500 12px/1.35 var(--i-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
+.intro-hud b{color:var(--i-txt);font-weight:600}
+.intro-skip{position:absolute;z-index:20;top:calc(8px + env(safe-area-inset-top));right:8px;display:inline-flex;min-width:48px;min-height:48px;align-items:center;gap:6px;border:1px solid #ffffff33;border-radius:999px;padding:10px 16px;background:#0b0b0dcc;color:var(--i-txt);cursor:pointer;font:600 12px/1 var(--i-mono);letter-spacing:.12em;text-transform:uppercase}
+.intro-skip:hover{border-color:var(--i-red)}
+.intro-skip:focus-visible{outline:3px solid #ffd35c;outline-offset:3px}
+.intro-flash{position:absolute;z-index:15;inset:0;background:#fff;opacity:0;pointer-events:none}
+
+/* Chispa */
+.i-spark,.i-ring{position:absolute;top:50%;left:50%;border-radius:50%;opacity:0}
+.i-spark{width:14px;height:14px;margin:-7px;background:#fff;box-shadow:0 0 12px 4px #ff2a36,0 0 46px 14px #e50914a6,0 0 120px 40px #e5091440}
+.i-ring{width:min(62vw,46vh);height:min(62vw,46vh);margin:calc(min(62vw,46vh) / -2);border:1px solid #ff2a36b3;box-shadow:0 0 22px #e5091459,inset 0 0 22px #e5091433}
+.i-flare{position:absolute;top:50%;left:0;width:100%;height:2px;margin-top:-1px;background:linear-gradient(90deg,transparent,#ff2a36 30%,#fff 50%,#ff2a36 70%,transparent);box-shadow:0 0 18px 2px #e50914;opacity:0}
+
+/* Frase */
+.i-lines{position:relative;display:grid;gap:.04em;font-size:clamp(56px,min(17vw,21vh),190px);font-weight:700;line-height:.95;text-align:center;text-transform:uppercase}
+.i-lines span{display:inline-block;white-space:pre}
+
+/* Logo */
+.i-brand{position:relative;display:grid;justify-items:center;gap:clamp(10px,2.4vh,22px)}
+.i-glow{position:absolute;top:44%;left:50%;width:150%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#e5091447 0,#e5091414 38%,transparent 66%);opacity:0;translate:-50% -50%;pointer-events:none}
+.i-logo{position:relative;width:min(72vw,46vh,420px);aspect-ratio:1880/1970;opacity:0}
+.i-logo img{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 10px 30px #000)}
+.i-logo .i-logo-ghost{opacity:0;mix-blend-mode:screen;filter:none}
+.i-logo .i-logo-ghost.r{filter:sepia(1) saturate(9) hue-rotate(-40deg)}
+.i-logo .i-logo-ghost.c{filter:sepia(1) saturate(9) hue-rotate(150deg)}
+.intro-lite .i-logo .i-logo-ghost{filter:none}
+.i-shine{position:absolute;inset:0;overflow:hidden;-webkit-mask:url("../assets/intro/logo-forros-cuenca-360.webp") center/contain no-repeat;mask:url("../assets/intro/logo-forros-cuenca-360.webp") center/contain no-repeat;pointer-events:none}
+.i-shine i{position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,#ffffffb3 50%,transparent 65%);transform:translateX(-120%);mix-blend-mode:overlay}
+.i-pix{position:absolute;inset:-3%;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(8,1fr)}
+.i-pix i{background:var(--i-bg)}
+.i-est{color:var(--i-mute);font:500 12px/1.4 var(--i-mono);letter-spacing:.2em;text-align:center;text-transform:uppercase;opacity:0}
+
+@media (min-aspect-ratio:1/1){
+  .i-lines{grid-auto-flow:column;gap:.28em;font-size:clamp(56px,min(10vw,21vh),190px)}
+  .i-logo{width:min(40vw,52vh,440px)}
+  .i-est{font-size:13px}
+}
+@media (max-width:420px){.i-est{padding:0 16px;letter-spacing:.12em}}
+
+/* 2026-10-09 ajustes finales */
+@media (max-width:360px){.intro-hud{font-size:10px;letter-spacing:.02em}}

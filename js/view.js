@@ -426,9 +426,9 @@ function renderVehicleFields(vehicle) {
 
 function renderQuoteLabel() {
   const price = String(PRECIO_DESDE ?? "").trim();
-  elements.mobileQuoteButton.textContent = price
-    ? `Cotizar en WhatsApp · Desde $${price}`
-    : "Cotizar en WhatsApp";
+  // la etiqueta cambia según la sección que se ve (js/secciones.js la deja en data-etiqueta)
+  const etiqueta = elements.mobileQuoteButton.dataset.etiqueta || "Cotizar en WhatsApp";
+  elements.mobileQuoteButton.textContent = price ? `${etiqueta} · Desde $${price}` : etiqueta;
 }
 
 // Encuadre de cada muestra de acolchado, en unidades del asiento: un acercamiento

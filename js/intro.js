@@ -1,6 +1,7 @@
 // Intro corta de la portada (~2,6 s): chispa roja, «TU AUTO. TU ESTILO.» y el logo, luego se ve el sitio.
 // Solo se monta si js/intro-gate.js puso html.intro-on. Todas las animaciones son WAAPI creadas a la vez con
-// retrasos y cuelgan de una animación «maestra»: pausar (pestaña oculta) o saltar afecta a todo por igual.
+// retrasos y cuelgan de una animación «maestra»: pausar (pestaña oculta) afecta a todo por igual.
+// No se puede saltar (decisión del dueño); dura 2,6 s, sale una vez por sesión y nunca con «reducir movimiento».
 const doc = document.documentElement;
 
 const T = { phrase: 300, logo: 1100, end: 2600 };
@@ -146,7 +147,6 @@ function mount() {
   function finish() {
     if (done) return;
     done = true;
-    document.removeEventListener("keydown", onKey);
     document.removeEventListener("visibilitychange", onVisibility);
     REDUCED_MOTION.removeEventListener("change", onMotionChange);
     const hadFocus = intro.contains(document.activeElement);
@@ -174,10 +174,6 @@ function mount() {
     }
   }
 
-  function onKey(event) {
-    if (event.key === "Escape") finish();
-  }
-
   function onMotionChange() {
     if (REDUCED_MOTION.matches) finish();
   }
@@ -196,9 +192,7 @@ function mount() {
 
   // La salida cuelga de la promesa de la animación maestra, no de rAF (que se detiene en segundo plano).
   master.finished.then(finish, () => {});
-  $(".intro-skip").addEventListener("click", finish);
-  document.addEventListener("keydown", onKey);
   document.addEventListener("visibilitychange", onVisibility);
   REDUCED_MOTION.addEventListener("change", onMotionChange);
-  $(".intro-skip").focus({ preventScroll: true });
+  intro.focus({ preventScroll: true });
 }

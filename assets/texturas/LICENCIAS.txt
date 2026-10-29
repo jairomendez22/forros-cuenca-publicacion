@@ -1,0 +1,5 @@
+Texturas de cuero (mapas normal y de rugosidad reducidos a 1024 px):
+- cuero-americano-*.webp  <- ambientCG "Leather026" (CC0 1.0, dominio público): https://ambientcg.com/a/Leather026
+- cuero-colombiano-*.webp <- ambientCG "Leather031" (CC0 1.0, dominio público): https://ambientcg.com/a/Leather031
+Licencia CC0: se pueden usar en proyectos comerciales sin atribución.
+cuero-real-normal.webp / cuero-real-rugosidad.webp: derivadas de fotos propias del taller (ya existían).

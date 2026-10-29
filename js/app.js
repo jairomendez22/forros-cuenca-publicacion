@@ -5,7 +5,7 @@ import {
 import { cleanFreeText, getShareUrl, loadConfig, persistConfig } from "./state.js?v=2";
 import {
   announce, bindView, exportDesignPng, render, showToast,
-} from "./view.js?v=9";
+} from "./view.js?v=10";
 
 const loaded = loadConfig();
 const config = loaded.config;
@@ -67,6 +67,26 @@ const actions = {
 
 bindView(actions);
 
+// Asiento 3D: se carga cuando el configurador se acerca a la pantalla. Si el
+// navegador no puede mostrarlo, queda el dibujo plano del asiento.
+let asiento3d = null;
+const escenario = document.querySelector("#seat-stage");
+if (escenario && "IntersectionObserver" in window) {
+  const vigia = new IntersectionObserver((entradas) => {
+    if (!entradas.some((entrada) => entrada.isIntersecting)) return;
+    vigia.disconnect();
+    import("./asiento-real/configurador.js?v=22")
+      .then(({ iniciarAsiento3D }) => {
+        asiento3d = iniciarAsiento3D(escenario, { alElegirZona: (zona) => actions.selectPart(zona) });
+        asiento3d?.actualizar(config, ui.activePart);
+      })
+      .catch(() => {
+        // Sin 3D se mantiene el dibujo plano.
+      });
+  }, { rootMargin: "800px 0px" });
+  vigia.observe(escenario);
+}
+
 renderAll();
 if (loaded.warning) showToast(loaded.warning);
 else if (loaded.source === "local") showToast("Recuperamos tu último diseño guardado en este dispositivo.");
@@ -79,6 +99,7 @@ function commit(message) {
 
 function renderAll(options) {
   render(config, ui, options);
+  asiento3d?.actualizar(config, ui.activePart);
 }
 
 async function saveDesignImage() {
@@ -146,8 +167,11 @@ function buildWhatsAppMessage() {
   const embroideryText = cleanEmbroidery ? `: ${cleanEmbroidery}` : requiresEmbroideryText ? ": (por indicar)" : "";
   const vehicleModel = cleanFreeText(config.vehicle.model, 60).trim();
 
+  // lo que el cliente estaba viendo al tocar el botón (js/secciones.js lo deja en <html data-interes>)
+  const interes = document.documentElement.dataset.interes;
   return [
     "Hola, Forros Cuenca. Quiero cotizar esta orden de tapizado:", "",
+    ...(interes ? [`Me interesa: ${interes}`, ""] : []),
     "*VEHÍCULO*", `Marca y modelo: ${vehicleModel || "No indicado"}`, `Año: ${config.vehicle.year.trim() || "No indicado"}`, "",
     "*MATERIAL*", findById(MATERIALS, config.material).label, "",
     "*RIBETE DE CONTRASTE*", findById(PIPING_COLORS, config.piping).label, "",

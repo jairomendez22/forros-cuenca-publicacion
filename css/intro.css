@@ -19,9 +19,6 @@ html.intro-on body::before{position:fixed;z-index:1999;inset:0;background:#06060
 .intro-corner.br{right:12px;bottom:calc(12px + env(safe-area-inset-bottom));border-right-width:1px;border-bottom-width:1px}
 .intro-hud{position:absolute;top:calc(20px + env(safe-area-inset-top));left:22px;color:var(--i-mute);font:500 12px/1.35 var(--i-mono);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
 .intro-hud b{color:var(--i-txt);font-weight:600}
-.intro-skip{position:absolute;z-index:20;top:calc(8px + env(safe-area-inset-top));right:8px;display:inline-flex;min-width:48px;min-height:48px;align-items:center;gap:6px;border:1px solid #ffffff33;border-radius:999px;padding:10px 16px;background:#0b0b0dcc;color:var(--i-txt);cursor:pointer;font:600 12px/1 var(--i-mono);letter-spacing:.12em;text-transform:uppercase}
-.intro-skip:hover{border-color:var(--i-red)}
-.intro-skip:focus-visible{outline:3px solid #ffd35c;outline-offset:3px}
 .intro-flash{position:absolute;z-index:15;inset:0;background:#fff;opacity:0;pointer-events:none}
 
 /* Chispa */
@@ -58,3 +55,4 @@ html.intro-on body::before{position:fixed;z-index:1999;inset:0;background:#06060
 
 /* 2026-10-09 ajustes finales */
 @media (max-width:360px){.intro-hud{font-size:10px;letter-spacing:.02em}}
+.intro:focus{outline:none}

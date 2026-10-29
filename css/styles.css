@@ -19,7 +19,7 @@ button,input{font:inherit}button{color:inherit}a{color:inherit}
 .section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}.preview-heading{z-index:2;flex:0 0 auto;align-items:center;padding:8px 10px 0}.controls-heading{padding:14px 14px 0}
 .eyebrow{margin:0 0 2px;color:#ff5962;font-size:max(12px,.75rem);font-weight:700;letter-spacing:.08em;text-transform:uppercase}h1,h2,h3{margin:0;line-height:1.15}h1{font-size:17px}h2{font-size:20px}h3{font-size:17px}
 .material-badge{flex:0 0 auto;max-width:47%;border:1px solid #4a4c55;border-radius:999px;padding:5px 9px;background:#08090bcc;color:#d5d6da;font-size:max(12px,.75rem);font-weight:600;text-align:center}
-.seat-stage{position:relative;display:grid;min-height:0;flex:1 1 auto;place-items:center;padding:0 4px;background:radial-gradient(ellipse at 50% 20%,#282b34 0,#111217 51%,#08090b 82%);overflow:hidden;isolation:isolate;contain:paint}
+.seat-3d{position:absolute;inset:0}.seat-stage.has-3d #seat{display:none}.seat-stage{position:relative;display:grid;min-height:0;flex:1 1 auto;place-items:center;padding:0 4px;background:radial-gradient(ellipse at 50% 20%,#282b34 0,#111217 51%,#08090b 82%);overflow:hidden;isolation:isolate;contain:paint}
 #seat{display:block;width:auto;max-width:100%;height:100%;max-height:100%;filter:drop-shadow(0 16px 20px rgba(0,0,0,.65));isolation:isolate}
 .zone{cursor:pointer;stroke:#ffffff12;stroke-width:1.3;stroke-dasharray:none;stroke-linecap:round;transition:stroke .12s,stroke-width .12s,filter .12s;touch-action:manipulation}.zone:hover{stroke:#ffffffa8!important;stroke-width:2;filter:drop-shadow(0 0 6px #ffffff4d)}.zone.is-active{stroke:#fff!important;stroke-width:2.4;stroke-dasharray:none;filter:drop-shadow(0 0 7px #e5091480)}.zone:focus-visible{outline:none;stroke:var(--focus)!important;stroke-width:3.2;stroke-dasharray:none}.pattern-layer{fill:none}.grain{mix-blend-mode:overlay}.zone-numbers circle{fill:#040507c9;stroke:#ffffffbf;stroke-width:1.5}.zone-numbers text{fill:#fff;font:700 16px "Poppins",sans-serif;text-anchor:middle;dominant-baseline:central}.embroidery-preview{fill:#fff;stroke:#111;stroke-width:3;paint-order:stroke;font:700 max(12px,.75rem) "Poppins",sans-serif;letter-spacing:.04em}
 
@@ -667,3 +667,177 @@ a.catalog-button,.quote-button{animation:fc-latido 1.9s ease-in-out infinite,fc-
 /* 2026-10-09 ajustes finales */
 /* En pantallas angostas, el texto da nombre al logo sin ocupar espacio visible. */
 @media (max-width:1049px){.brand-copy{display:block;position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);clip-path:inset(50%);white-space:nowrap}}
+
+/* 2026-10-27 ¿Qué tapizamos?: sin puntos; descripción en gris claro con filete rojo y apertura suave */
+:root{interpolate-size:allow-keywords}
+.services-list summary{grid-template-columns:1fr 48px}
+.service-dot{display:none}
+/* 2026-10-28: la descripción se cambió por una foto del servicio */
+.servicio-foto{margin:0 12px 26px;overflow:hidden;aspect-ratio:16/9;border:1px solid #ffffff14;border-radius:14px;background:#16171b}
+.servicio-foto img{display:block;width:100%;height:100%;object-fit:cover}
+.services-list details[open] .servicio-foto{animation:servicio-abre .38s cubic-bezier(.2,.75,.25,1) both}
+.services-list details[open] .servicio-foto img{animation:servicio-foto-entra .7s cubic-bezier(.2,.75,.25,1) both}
+@keyframes servicio-foto-entra{from{transform:scale(1.06)}to{transform:none}}
+.services-list details::details-content{block-size:0;overflow:hidden;transition:block-size .38s cubic-bezier(.2,.75,.25,1),content-visibility .38s allow-discrete}
+.services-list details[open]::details-content{block-size:auto}
+@keyframes servicio-abre{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.services-list details[open] :is(.servicio-foto,.servicio-foto img){animation:none}.services-list details::details-content{transition:none}}
+
+/* 2026-10-28 Reseñas en rompecabezas (reemplaza «Hecho para tu auto»): la sección mide casi 3 pantallas y el bloque
+   queda fijo mientras las 6 piezas (rojo, negro y azul) llegan revueltas y encajan una por una siguiendo el scroll.
+   En pantallas angostas el rompecabezas es más ancho que la pantalla y se desliza de izquierda a derecha.
+   Formas de ~/Documents/threejs/rompecabezas-resenas.html; textos con herramientas/resenas-rompecabezas.py; lógica en js/secciones.js. */
+.resenas{--rtop:var(--header-h);--s:.8;--k:0;display:block;height:280svh;padding:0;gap:0}
+@media (min-width:900px){.resenas{--rtop:86px}}
+.resenas-defs{position:absolute;width:0;height:0}
+/* el rompecabezas cubre todo el bloque fijo; el título queda al centro, detrás, y las piezas lo van tapando */
+.resenas-fijo{position:sticky;top:var(--rtop);height:calc(100svh - var(--rtop));overflow:clip}
+.resenas-cabeza{position:absolute;inset:0 0 var(--bar-h);display:grid;place-content:center;padding:0 18px;text-align:center}
+.resenas-cabeza .section-kicker{justify-content:center;margin-bottom:12px}
+.resenas-cabeza h2{font-size:clamp(2.4rem,9vw,5rem);line-height:.95}
+.rompecabezas-marco{position:absolute;z-index:1;inset:0 0 var(--bar-h)}
+@media (min-width:900px){.resenas-cabeza,.rompecabezas-marco{bottom:0}}
+.rompecabezas{position:absolute;top:50%;left:50%;width:900px;height:506.6px;transform:translate(calc(-50% + var(--pan,0px)),-50%) scale(var(--s))}
+.forma{position:absolute;inset:0;width:100%;height:100%}
+.forma{overflow:visible}
+.forma .sombra{fill:rgba(0,0,0,.16);transform:translateY(9.25px)}
+.forma .canto{fill:var(--edge);transform:translateY(3.75px)}
+.forma .cara{fill:var(--face);fill-opacity:.9}
+/* --k: 1 = revuelta y levantada, 0 = encajada (lo pone js/secciones.js) */
+/* sin pieza a la vista hasta que empieza a llegar: aparece de la nada mientras viaja a su lugar */
+.pieza{position:absolute;inset:0;z-index:var(--z);pointer-events:none;opacity:clamp(0,calc((1 - var(--k)) * 2.5),1);transform-origin:var(--ox) var(--oy);
+  transform:translate(calc(var(--dx) * var(--k) * 2.4),calc(var(--dy) * var(--k) * 2.4)) rotate(calc(var(--r) * var(--k) * 3)) scale(calc(1 + (var(--sc) - 1) * var(--k) * 2))}
+.resena{position:absolute;top:calc(var(--y) + 40px);left:calc(var(--x) + 47px);display:flex;width:var(--cw);height:calc(var(--h) - 100px);flex-direction:column;margin:0;color:var(--ink);opacity:clamp(0,calc(1 - var(--k) * 6),1)}
+.resena-estrellas{color:var(--accent);font-size:15px;letter-spacing:.12em;line-height:1}
+.resena blockquote{margin:9px 0 0;font-size:14px;line-height:1.42}
+.resena figcaption{display:flex;align-items:center;gap:8px;margin-top:auto}
+.resena-inicial{display:grid;width:30px;height:30px;flex:none;place-items:center;border:1px solid currentColor;border-radius:50%;font-family:var(--display);font-size:14px;font-weight:700}
+.resena b{display:block;font-size:12.5px;font-weight:700;line-height:1.2}
+.resena small{display:block;margin-top:2px;overflow:hidden;color:var(--muted);font-size:10px;letter-spacing:.08em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
+.resena-ejemplo{position:absolute;top:-4px;right:0;padding:2px 7px;border-radius:999px;background:#ffd35c;color:#111;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+@media (prefers-reduced-motion:reduce){.pieza{opacity:1;transform:none}.resena{opacity:1}}
+/* letra de las reseñas: Playfair Display (libre, parecida a Mesagni, que es de pago) */
+.resena{font-family:"Playfair Display",Georgia,serif}
+.resena blockquote{font-size:17px;font-style:italic;line-height:1.38}
+.resena b{font-size:14.5px;font-weight:600;letter-spacing:.01em}
+.resena small{font-size:10.5px;letter-spacing:.12em}
+.resena-inicial{font-family:"Playfair Display",Georgia,serif;font-size:16px;font-style:italic;font-weight:600}
+.resena-estrellas{font-family:inherit}
+
+/* 2026-10-27 Marca roja que viaja (mismo gesto que los pasos de Cómo trabajamos): en el menú de arriba va al
+   enlace señalado o a la sección que se ve; en ¿Qué tapizamos? al servicio abierto. Los botones de cotizar
+   crecen al acercar el mouse. Lógica en js/secciones.js. */
+.con-marca{isolation:isolate}
+.services-list.con-marca{position:relative}
+@media (min-width:1050px){.site-nav.con-marca{position:relative;inset:auto}}
+.marca-viaja{position:absolute;z-index:-1;top:0;left:0;border:1px solid #e5091499;border-radius:999px;background:linear-gradient(180deg,#e509142e,#e509140a);box-shadow:0 10px 26px -14px #e50914;opacity:0;pointer-events:none;transition:translate .5s cubic-bezier(.3,1.25,.4,1),width .5s cubic-bezier(.3,1.25,.4,1),height .35s ease,opacity .25s ease}
+.marca-viaja.is-visible{opacity:1}
+.marca-viaja.sin-viaje{transition:opacity .25s ease}
+.services-list .marca-viaja{border-radius:12px}
+.site-nav.con-marca a[href]:not(:disabled):hover,.site-nav.con-marca a[href]:not(:disabled):focus-visible{color:#fff}
+@media (hover:hover) and (pointer:fine){.services-list.con-marca summary:hover strong{background:none;color:#fff}}
+:is(.hero .hero-primary,.site-header .header-quote,.closing-band .closing-button,.location-copy .map-link,.quote-button):not(:disabled){transition:color 180ms ease,outline-color 180ms ease,scale .2s ease-out}
+@media (prefers-reduced-motion:reduce){.marca-viaja{transition:opacity .2s ease}}
+
+/* 2026-10-28 Cómo trabajamos estilo «Scrollable Images» (~/Documents/threejs/imagenes-desplazables.html): una foto a
+   pantalla completa por paso y, encima, fija mientras pasa la sección, la columna de palabras grandes que sube con el
+   scroll y se inclina según la velocidad, el texto del paso arriba a la izquierda y los puntos. Lógica en js/secciones.js. */
+html:has(.pasos){scroll-snap-type:y proximity}
+.process-section.pasos{--pasos-top:var(--header-h);--fs:min(21vh,15vw);position:relative;padding:0;background:#0b0c0f}
+@media (min-width:900px){.process-section.pasos{--pasos-top:86px}}
+.paso{position:relative;height:calc(100svh - var(--pasos-top));overflow:hidden;background:#151311;scroll-snap-align:start;scroll-margin-top:calc(var(--pasos-top) - var(--header-h))}
+.paso-foto,.paso-foto picture{position:absolute;inset:0;display:block}
+.paso-foto img{display:block;width:100%;height:100%;object-fit:cover}
+.paso-foto::after{position:absolute;inset:0;background:linear-gradient(180deg,#0b0c0fb3 0,#0b0c0f52 40%,#0b0c0f75 100%);content:"";pointer-events:none}
+#paso-4 .paso-foto img{object-position:30% 50%}
+.pasos-capa{position:absolute;z-index:2;inset:0;pointer-events:none}
+.pasos-fijo{position:sticky;top:var(--pasos-top);height:calc(100svh - var(--pasos-top));overflow:clip}
+.pasos-palabras{position:absolute;inset:0;overflow:hidden}
+.pasos-escenario{position:absolute;top:62%;left:50%;width:0;height:0;will-change:transform}
+.pasos-columna{position:absolute;top:0;left:0;will-change:transform}
+.paso-palabra{position:absolute;left:0;height:var(--fs);font-family:var(--display);font-size:var(--fs);font-weight:700;line-height:1;letter-spacing:-.01em;transform:translateX(-50%);white-space:nowrap}
+.paso-palabra span{display:block}
+.paso-palabra .contorno{color:transparent;-webkit-text-stroke:1.2px #ffffff9e}
+.paso-palabra .relleno{position:absolute;inset:0;color:#fff}
+.pasos-copia{position:absolute;top:28px;right:18px;left:18px;max-width:430px;pointer-events:auto}
+.process-section .pasos-copia h2{margin:0 0 14px;color:#fff;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.16em}
+.pasos-textos{display:grid;margin:0;padding:0;list-style:none}
+.paso-texto{grid-area:1/1}
+.paso-num{display:block;color:#ff626a;font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.paso-texto h3{margin:10px 0 0;color:#fff;font-family:var(--display);font-size:clamp(30px,3.6vw,46px);font-weight:600;line-height:1.05;text-shadow:0 2px 18px #000a;text-transform:uppercase}
+.paso-texto hr{width:64px;margin:20px 0 16px;border:0;border-top:2px solid var(--red)}
+.paso-texto p{margin:0;color:#e3e4e8;font-size:15px;line-height:1.6;text-shadow:0 1px 10px #000c}
+.paso-boton{display:inline-flex;min-height:44px;align-items:center;margin-top:20px;padding:0 22px;border:1.5px solid #ffffffb8;border-radius:999px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.14em;text-decoration:none;text-transform:uppercase;transition:background-color .25s,border-color .25s}
+.paso-boton:hover{border-color:var(--red);background:var(--red)}
+.paso-boton:focus-visible,.pasos-puntos a:focus-visible{outline:2px solid #fff;outline-offset:3px}
+/* con JS se ve un solo texto a la vez: sale el anterior y entra el siguiente en cascada */
+.pasos-js .paso-texto{visibility:hidden;transition:visibility 0s .5s}
+.pasos-js .paso-texto.is-in{visibility:visible;transition:none}
+.pasos-js .paso-texto>*{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.pasos-js .paso-texto.is-in>*{opacity:1;transform:none}
+.pasos-js .paso-texto.is-in>:nth-child(2){transition-delay:.08s}
+.pasos-js .paso-texto.is-in>:nth-child(3){transition-delay:.16s}
+.pasos-js .paso-texto.is-in>:nth-child(4){transition-delay:.24s}
+.pasos-js .paso-texto.is-in>:nth-child(5){transition-delay:.32s}
+.pasos-puntos{position:absolute;top:62%;left:4px;display:flex;flex-direction:column;transform:translateY(-50%);pointer-events:auto}
+.pasos-puntos a{display:grid;width:26px;height:26px;place-items:center;border-radius:50%}
+.pasos-puntos i{width:6px;height:6px;border-radius:50%;background:#ffffff73;transition:transform .35s,background-color .35s}
+.pasos-puntos a[aria-current="step"] i{background:#fff;transform:scale(1.55)}
+@media (min-width:560px){.pasos-copia{left:36px}.pasos-puntos{left:10px}}
+@media (min-width:1050px){.pasos-copia{top:44px;left:max(36px,calc((100vw - 1360px)/2))}.paso-texto p{font-size:16px}#paso-4 .paso-foto img{object-position:50% 50%}}
+@media (prefers-reduced-motion:reduce){html:has(.pasos){scroll-snap-type:none}.pasos-js .paso-texto>*{transform:none;transition:opacity .3s}.pasos-puntos i{transition:none}}
+
+/* el body no debe ser contenedor de scroll (en escritorio html tiene overflow:auto), si no la sección no se queda fija */
+body{overflow-x:clip;overflow-y:visible}
+
+/* 2026-10-28 Un estilo para cada vehículo: los 8 asientos entran todos a la vez desde posiciones revueltas (corridos,
+   girados y más chicos) y el propio scroll los va acomodando: quedan en su lugar cuando la grilla ya se ve bien y
+   siguen con su vaivén. Si se vuelve a subir, se desarman igual. Solo CSS (scroll-driven animations). */
+/* clip en los dos ejes: los asientos revueltos no se salen sobre la franja de marcas */
+.works-section{overflow:clip}
+.catalog-grid{view-timeline:--catalogo block}
+/* arrancan más arriba de su lugar (en vh) para que el desorden se vea en pantalla y no debajo del borde */
+.catalog-card:nth-child(1){--ax:40vw;--ay:-45vh;--ar:-28deg;--as:.6}
+.catalog-card:nth-child(2){--ax:-26vw;--ay:-10vh;--ar:24deg;--as:.75}
+.catalog-card:nth-child(3){--ax:20vw;--ay:-30vh;--ar:40deg;--as:.5}
+.catalog-card:nth-child(4){--ax:-53vw;--ay:-55vh;--ar:-18deg;--as:.7}
+.catalog-card:nth-child(5){--ax:60vw;--ay:-40vh;--ar:16deg;--as:.8}
+.catalog-card:nth-child(6){--ax:-19vw;--ay:-80vh;--ar:-34deg;--as:.55}
+.catalog-card:nth-child(7){--ax:-15vw;--ay:-60vh;--ar:30deg;--as:.65}
+.catalog-card:nth-child(8){--ax:4vw;--ay:-95vh;--ar:-24deg;--as:.85}
+@media (max-width:899px){
+  .catalog-card:nth-child(1){--ax:55vw;--ay:-6vh}.catalog-card:nth-child(2){--ax:-60vw;--ay:-24vh}
+  .catalog-card:nth-child(3){--ax:42vw;--ay:-11vh}.catalog-card:nth-child(4){--ax:-43vw;--ay:-35vh}
+  .catalog-card:nth-child(5){--ax:63vw;--ay:-37vh}.catalog-card:nth-child(6){--ax:-27vw;--ay:-70vh}
+  .catalog-card:nth-child(7){--ax:-15vw;--ay:-47vh}.catalog-card:nth-child(8){--ax:-21vw;--ay:-77vh}
+}
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .catalog-card{animation:catalogo-alborotado linear both;animation-timeline:--catalogo;animation-range:cover 0% cover 50%}
+}}
+/* versión sobria (pedido del dueño): menos de la mitad del desorden y del giro, y un recorrido más largo y parejo */
+@keyframes catalogo-alborotado{
+  0%{opacity:0;transform:translate(calc(var(--ax) * .4),calc(var(--ay) * .4)) rotate(calc(var(--ar) * .3)) scale(calc(1 - (1 - var(--as)) * .35));animation-timing-function:cubic-bezier(.3,0,.25,1)}
+  35%{opacity:1}
+  100%{opacity:1;transform:none}
+}
+
+
+/* ---- Guía de movimiento (investigación de Gemini, 2026-10-28). Todo se apaga con «reducir movimiento». ---- */
+/* Split text: cada palabra del título sube y aparece, una tras otra (total menos de 0,6 s por título) */
+.titulo-partido .palabra{display:inline-block;opacity:0;transform:translateY(.38em);transition:opacity .45s ease calc(var(--i) * 70ms),transform .6s cubic-bezier(.22,1,.36,1) calc(var(--i) * 70ms)}
+.titulo-partido.is-visible .palabra{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    /* Mask reveal: la foto del banner se destapa desde un marco recortado mientras se baja */
+    .detail-banner>picture>img{animation:mascara-abre linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+    /* Micro-parallax en la portada: el asiento baja un poco más lento que la página al salir */
+    .hero-visual{animation:portada-profundidad linear both;animation-timeline:view();animation-range:exit 0% exit 100%}
+  }
+}
+@keyframes mascara-abre{from{clip-path:inset(14% 10% 14% 10% round 28px);transform:scale(1.12)}to{clip-path:inset(0 0 0 0 round 0);transform:none}}
+@keyframes portada-profundidad{to{transform:translateY(60px) scale(.96)}}
+@media (prefers-reduced-motion:reduce){.titulo-partido .palabra{opacity:1;transform:none;transition:none}}
+
+/* overflow:clip y no hidden: hidden lo vuelve contenedor de scroll y la máscara por scroll (view()) se queda quieta */
+.detail-banner{overflow:clip}

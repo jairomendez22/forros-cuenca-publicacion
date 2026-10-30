@@ -1,0 +1,116 @@
+/* Testimonios: recreación de «Afterwords» (Fabian Albert, @fabiuix, para eleveight.studio) con la marca de
+   Forros Cuenca. Medidas del original; el carrusel lo mueve js/testimonios.js. */
+.testimonios{
+  --tm-bandeja:#e2dfd8;
+  --tm-nota:rgba(255,254,251,.55);
+  --tm-tarjeta:#fcfbf8;
+  --tm-tinta-2:#2b2c30;
+  --tm-gris-cita:#8a8780;
+  --tm-gris:#75726c;
+  --tm-amarillo:#ffd35c;
+  /* curvas de los resortes de Framer: rebote .2 en .5 s, y sin rebote en .5 s */
+  --tm-rebote:linear(0, 0.0689, 0.22, 0.3945, 0.5595, 0.6991, 0.8083, 0.8883, 0.9434, 0.9787, 0.9996, 1.0103, 1.0146, 1.015, 1.0133, 1.0108, 1.0082, 1.0058, 1.0039, 1.0024, 1.0013, 1.0006, 1.0002, 0.9999, 0.9998, 0.9998, 1);
+  --tm-suave:linear(0, 0.0788, 0.2361, 0.403, 0.5509, 0.6711, 0.7638, 0.8329, 0.8832, 0.9191, 0.9445, 0.9621, 0.9743, 0.9827, 0.9884, 0.9922, 0.9948, 0.9965, 0.9977, 0.9985, 1);
+  --tm-entrada:cubic-bezier(.44,0,.56,1);
+  padding:clamp(80px,9vw,128px) 0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Poppins","Segoe UI",Arial,sans-serif;
+}
+.testimonios a{text-decoration:none}
+/* la web pone en negrita todos los enlaces (a[href]:not(.brand)); aquí se respeta el grosor del diseño */
+.testimonios a[href].tm-fuente{font-weight:500}
+.testimonios a[href].tm-plataforma{font-weight:600}
+.testimonios :focus-visible{outline-color:var(--ink)}
+.tm-defs{position:absolute;width:0;height:0}
+.tm-contenido{width:min(1100px,100% - 70px);margin-inline:auto}
+
+/* título con el estilo de la web: Oswald en mayúsculas y la segunda parte en Poppins cursiva roja */
+.tm-titulo{margin:0 0 35px 4px;font:700 44px/1.2 var(--display);letter-spacing:-.035em;text-transform:uppercase;color:var(--ink)}
+.tm-titulo span,.tm-titulo em{display:inline-block}
+.tm-titulo em{color:var(--red-bright);font-family:"Poppins",sans-serif;font-size:.72em;font-style:italic;font-weight:800;letter-spacing:-.06em}
+
+.tm-caja{display:flex;gap:8px;padding:8px;border-radius:24px;background:var(--tm-bandeja);overflow:clip}
+
+/* tarjeta de la nota de Google */
+.tm-nota{position:relative;display:flex;flex:none;width:292px;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:26px;border-radius:17px;background:var(--tm-nota);box-shadow:0 0 5px rgba(0,0,0,.04)}
+.tm-numero{margin:0;font:600 80px/1.2 var(--display);letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
+.tm-grupo{display:flex;flex-direction:column;align-items:center;gap:8px}
+.tm-estrellas{display:flex;gap:4px}
+.tm-estrellas svg{display:block;width:16px;height:16px;overflow:visible}
+.tm-fuente{font:500 16px/1.2 "Poppins",sans-serif;letter-spacing:-.02em;color:var(--tm-gris);white-space:nowrap}
+@media (hover:hover) and (pointer:fine){.tm-fuente:hover{color:var(--red)}}
+
+/* carrusel: scroll nativo con imán; el arrastre con mouse y dedo lo maneja el script */
+.tm-pista{position:relative;display:flex;flex:1 1 auto;min-width:0;gap:8px;overflow-x:auto;overflow-y:hidden;border-radius:17px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;overscroll-behavior-x:none;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:100% 100%;mask-size:100% 100%}
+.tm-pista::-webkit-scrollbar{display:none}
+.tm-pista:focus-visible{outline-offset:-3px;border-radius:17px}
+
+.tm-resena{display:flex;flex:none;width:658px;height:361px;flex-direction:column;gap:46px;margin:0;padding:26px;border-radius:17px;background:var(--tm-tarjeta);scroll-snap-align:start;scroll-snap-stop:always}
+.tm-resena:last-child{scroll-snap-align:end}
+.tm-cabeza{display:flex;height:24px;flex:none;align-items:center;justify-content:space-between}
+.tm-plataforma{display:inline-flex;align-items:center;gap:8px;font:600 19px/24px "Poppins",sans-serif;letter-spacing:-.03em;color:var(--ink)}
+.tm-plataforma svg{width:22px;height:22px;flex:none;fill:currentColor}
+a.tm-plataforma{cursor:pointer}
+@media (hover:hover) and (pointer:fine){a.tm-plataforma:hover{color:var(--red)}}
+.tm-etiqueta{margin-left:4px;padding:4px 8px 3px;border-radius:999px;background:var(--tm-amarillo);color:#111;font:800 10px/1 "Poppins",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.tm-cuerpo{display:flex;flex:1 1 auto;min-height:0;flex-direction:column;justify-content:space-between}
+.tm-resena blockquote{margin:0}
+.tm-resena blockquote p{margin:0;font:italic 400 26px/1.2 "Playfair Display",Georgia,serif;letter-spacing:-.01em;color:var(--tm-gris-cita);text-wrap:pretty}
+.tm-resena strong{font-weight:inherit;color:var(--ink)}
+.tm-comilla{color:var(--red)}
+.tm-pie{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.tm-autor{display:flex;flex-direction:column;gap:2px}
+.tm-autor b{font:600 16px/1.2 "Poppins",sans-serif;letter-spacing:-.02em;color:var(--tm-tinta-2)}
+.tm-autor span{font:500 16px/1.2 "Poppins",sans-serif;letter-spacing:-.02em;color:var(--tm-gris)}
+.tm-fecha{font:600 16px/1.2 "Poppins",sans-serif;letter-spacing:-.02em;color:var(--tm-tinta-2);white-space:nowrap}
+.tm-fecha-movil{display:none}
+
+/* punto que sigue al mouse dentro de la sección (cursor de la página original) */
+.tm-cursor{position:fixed;top:0;left:0;z-index:50;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:var(--red);pointer-events:none;opacity:0;transition:opacity .2s}
+.tm-cursor.visible{opacity:1}
+
+/* tableta: la nota pasa arriba, a lo ancho */
+@media (max-width:1199.98px){
+  .tm-titulo{font-size:37px}
+  .tm-caja{flex-direction:column}
+  .tm-nota{width:auto;height:126px;flex-direction:row;justify-content:space-between}
+  .tm-numero{font-size:71px}
+  .tm-grupo{flex-direction:column-reverse;align-self:stretch;align-items:flex-end;justify-content:space-between}
+  .tm-fuente{font-size:15px}
+  .tm-pista{flex:none}
+  .tm-resena{gap:26px}
+  .tm-autor b,.tm-autor span,.tm-fecha{font-size:15px}
+}
+
+/* celular: la tira de reseñas llega a los bordes y cada tarjeta se centra */
+@media (max-width:809.98px){
+  .tm-contenido{width:calc(100% - 32px)}
+  .tm-titulo{margin-bottom:26px}
+  .tm-caja{overflow:visible}
+  .tm-nota{height:142px;justify-content:center;gap:26px}
+  .tm-grupo{flex-direction:column;align-self:auto;align-items:flex-start;justify-content:flex-start}
+  .tm-fuente{font-size:16px}
+  .tm-pista{margin-inline:-24px;padding-inline:24px;scroll-padding-inline:24px;border-radius:0;cursor:auto}
+  .tm-resena{width:min((100vw - 48px) * .9006,342px);height:auto;min-height:413px;padding:20px;scroll-snap-align:center}
+  .tm-resena:first-child{scroll-snap-align:start}
+  .tm-resena:last-child{scroll-snap-align:end}
+  .tm-resena blockquote p{font-size:22px}
+  .tm-resena .tm-fecha-movil{display:block;font-size:14px}
+  .tm-pie .tm-fecha{display:none}
+  .tm-autor{gap:4px}
+  .tm-autor b,.tm-autor span{font-size:16px}
+}
+
+/* entrada al aparecer en pantalla (valores de Framer); la clase tm-anima la pone el script */
+.tm-anima .tm-titulo,.tm-anima .tm-caja{opacity:0;transform:translateY(14px);transition:opacity .5s var(--tm-entrada) .05s,transform .5s var(--tm-entrada) .05s}
+.tm-anima.tm-entra .tm-titulo,.tm-anima.tm-entra .tm-caja{opacity:1;transform:none}
+.tm-anima .tm-aparece{opacity:0;transform:scale(.8);transition:opacity .6s var(--tm-rebote) var(--d,.1s),transform .6s var(--tm-rebote) var(--d,.1s)}
+.tm-anima.tm-entra .tm-aparece{opacity:1;transform:none}
+.tm-anima .tm-resena{opacity:0;transition:opacity .5s var(--tm-suave) .1s}
+.tm-anima .tm-resena.tm-vista{opacity:1}
+@media (max-width:809.98px){.tm-anima .tm-caja{transform:translateY(22px)}.tm-anima.tm-entra .tm-caja{transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .tm-pista{scroll-behavior:auto}
+  .tm-anima .tm-titulo,.tm-anima .tm-caja,.tm-anima .tm-aparece,.tm-anima .tm-resena{opacity:1;transform:none;transition:none}
+}

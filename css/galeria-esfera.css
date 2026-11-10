@@ -1,0 +1,26 @@
+/* Galería en esfera de «Un estilo para cada vehículo» (js/galeria-esfera.js). */
+:root{--ge-fondo:#efece6;--ge-marco:#dcd7ce;--ge-marco-grande:#e2ded6}
+.works-section{background:var(--ge-fondo)}
+/* La galería es un recorrido largo; la escena queda fija mientras el scroll hace aparecer las fotos y meter la cámara. */
+.galeria-esfera{position:relative;height:280svh;margin:34px calc(50% - 50vw) 0;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.ge-escena{position:sticky;top:0;height:100svh}
+.galeria-esfera.ge-sin-webgl{height:clamp(420px,88svh,62vw + 260px)}
+@media (prefers-reduced-motion:reduce){.galeria-esfera{height:clamp(420px,88svh,62vw + 260px)}.ge-escena{position:relative;height:100%}}
+.galeria-esfera canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:pan-y;outline:none;transition:filter .5s ease;-webkit-mask-image:linear-gradient(180deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(180deg,transparent,#000 6%,#000 94%,transparent)}
+.galeria-esfera canvas:focus-visible{outline:3px solid var(--focus,#ffd35c);outline-offset:-3px}
+.galeria-esfera.ge-arrastrando canvas{cursor:grabbing}
+.galeria-esfera.ge-abierta canvas{filter:blur(4px)}
+.ge-botones{position:absolute;left:50%;bottom:14px;display:flex;gap:4px;translate:-50% 0}
+.ge-botones button{display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:50%;background:#1b1b1b;color:#fff;cursor:pointer;transition:background-color .2s ease,scale .2s ease}
+.ge-botones svg{width:14px;height:14px}
+@media (hover:hover) and (pointer:fine){.ge-botones button:hover{background:#e50914;scale:1.08}}
+.ge-botones button:focus-visible{outline:3px solid var(--focus,#ffd35c);outline-offset:2px}
+.ge-ampliada{position:fixed;z-index:70;box-sizing:border-box;border-radius:3.9%;background:var(--ge-marco-grande);cursor:zoom-out;will-change:transform}
+.ge-foto{position:relative;width:100%;height:100%;overflow:hidden;border-radius:3.4%;background-color:#060607;background-repeat:no-repeat}
+.ge-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s ease}
+.ge-foto img.ge-cargada{opacity:1}
+.ge-pie{position:absolute;inset:auto 0 0;display:flex;align-items:center;justify-content:center;height:10.5%;margin:0;color:#6a665f;font-size:1em;line-height:1;letter-spacing:.02em;white-space:nowrap}
+.ge-pie b{margin-right:.55em;color:#1b1b1b;font-weight:700}
+.ge-sin-webgl ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px;height:100%;margin:0;padding:18px;overflow:auto;list-style:none}
+.ge-sin-webgl img{display:block;width:100%;height:auto;border:10px solid var(--ge-marco);border-radius:6px}
+@media (prefers-reduced-motion:reduce){.galeria-esfera canvas,.ge-foto img,.ge-botones button{transition:none}}

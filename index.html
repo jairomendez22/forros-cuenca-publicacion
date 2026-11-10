@@ -32,11 +32,13 @@
   <script src="./js/intro-gate.js?v=4"></script>
   <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/oswald-normal-500-700.woff2" crossorigin>
   <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/poppins-normal-400.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/fragment-mono.woff2" crossorigin>
   <link rel="preload" as="image" type="image/avif" imagesrcset="./assets/portada/forro-01-480.avif 480w, ./assets/portada/forro-01-860.avif 860w" imagesizes="(min-width: 1050px) 472px, (min-width: 900px) 248px, (min-width: 390px) 352px, calc(100vw - 36px)" fetchpriority="high">
-  <link rel="stylesheet" href="./css/fonts.css?v=2">
-  <link rel="stylesheet" href="./css/styles.css?v=59">
+  <link rel="stylesheet" href="./css/fonts.css?v=3">
+  <link rel="stylesheet" href="./css/styles.css?v=72">
   <link rel="stylesheet" href="./css/testimonios.css?v=1">
   <link rel="stylesheet" href="./css/intro.css?v=5">
+  <link rel="stylesheet" href="./css/galeria-esfera.css?v=2">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -136,10 +138,10 @@
         <span class="brand-copy"><strong>FORROS <em>CUENCA</em></strong><small>Tapizado por profesionales</small></span>
       </a>
       <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú"><span></span><span></span></button>
-      <nav class="site-nav" id="site-nav" aria-label="Navegación principal">
-        <a href="#trabajos">Trabajos</a><a href="#servicios">Servicios</a><a href="#configurador">Diseñador</a><a href="#nosotros">Nosotros</a><a href="#ubicacion">Ubicación</a>
+      <!-- Dock «Sable» de ThreeUI (AnimatedTopDock): los botones crecen y bajan con resorte al pasar el mouse. js/top-dock.js -->
+      <nav class="site-nav animated-top-dock__nav" id="site-nav" aria-label="Navegación principal" data-dock-state="idle" data-dock-max="0.00">
+        <a class="animated-top-dock__item animated-top-dock__link" data-dock-item href="#trabajos"><span class="animated-top-dock__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M5.2 2.4h4.4a1.6 1.6 0 0 1 1.6 1.6v5H5.6A1.6 1.6 0 0 1 4 7.4V3.6a1.2 1.2 0 0 1 1.2-1.2z"/><path d="M3.6 9h9l-.9 2.6H4.6zM6 11.6v2M10.8 11.6v2"/></svg></span><span>Trabajos</span></a><a class="animated-top-dock__item animated-top-dock__link" data-dock-item href="#servicios"><span class="animated-top-dock__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="4.5" cy="4.6" r="2"/><circle cx="4.5" cy="11.4" r="2"/><path d="M6.3 5.6 13.6 12M6.3 10.4 13.6 4"/></svg></span><span>Servicios</span></a><a class="animated-top-dock__item animated-top-dock__link" data-dock-item href="#configurador"><span class="animated-top-dock__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M10.8 2.6a1.6 1.6 0 0 1 2.3 2.3l-6.8 6.8-2.9.9.9-2.9z"/><path d="m9.6 3.8 2.3 2.3"/></svg></span><span>Diseñador</span></a><a class="animated-top-dock__item animated-top-dock__link" data-dock-item href="#nosotros"><span class="animated-top-dock__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><circle cx="6" cy="5.6" r="2.2"/><path d="M2.3 13c.6-2.4 2-3.6 3.7-3.6s3.1 1.2 3.7 3.6"/><circle cx="11.2" cy="6.2" r="1.7"/><path d="M10.5 9.6c1.6 0 2.8 1 3.3 3"/></svg></span><span>Nosotros</span></a><a class="animated-top-dock__item animated-top-dock__link" data-dock-item href="#ubicacion"><span class="animated-top-dock__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 14s4.5-4.2 4.5-7.6a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14z"/><circle cx="8" cy="6.4" r="1.6"/></svg></span><span>Ubicación</span></a><button class="animated-top-dock__item animated-top-dock__link dock-cotizar" data-dock-item data-action="whatsapp" type="button"><span class="animated-top-dock__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 3h10a1 1 0 0 1 1 1v6.4a1 1 0 0 1-1 1H7.6L4.6 14v-2.6H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M5 6.3h6M5 8.6h4"/></svg></span><span>Cotizar</span></button>
       </nav>
-      <button class="header-quote" data-action="whatsapp" type="button">Cotizar</button>
     </div>
   </header>
 
@@ -180,26 +182,20 @@
 
     <section class="marketing-section works-section" id="trabajos" aria-labelledby="works-section-title">
       <div class="section-intro reveal"><h2 id="works-section-title"><span class="line">UN ESTILO PARA</span> <span class="line"><em>CADA VEHÍCULO</em></span></h2></div>
-      <div class="catalog-grid">
-        <figure class="catalog-card"><picture><source type="image/avif" srcset="./assets/catalogo/asiento-fc16-360.avif 360w, ./assets/catalogo/asiento-fc16-720.avif 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><source type="image/webp" srcset="./assets/catalogo/asiento-fc16-360.webp 360w, ./assets/catalogo/asiento-fc16-720.webp 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><img src="./assets/catalogo/asiento-fc16-360.webp" width="360" height="480" loading="lazy" decoding="async" alt="Forro de asiento negro con ribetes blancos, costuras en V y bordado Toyota"></picture></figure>
-        <figure class="catalog-card"><picture><source type="image/avif" srcset="./assets/catalogo/asiento-fc18-360.avif 360w, ./assets/catalogo/asiento-fc18-720.avif 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><source type="image/webp" srcset="./assets/catalogo/asiento-fc18-360.webp 360w, ./assets/catalogo/asiento-fc18-720.webp 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><img src="./assets/catalogo/asiento-fc18-360.webp" width="360" height="480" loading="lazy" decoding="async" alt="Forro de asiento negro con hilo blanco, geometría angular y bordado Kia Rio"></picture></figure>
-        <figure class="catalog-card"><picture><source type="image/avif" srcset="./assets/catalogo/asiento-fc14-360.avif 360w, ./assets/catalogo/asiento-fc14-720.avif 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><source type="image/webp" srcset="./assets/catalogo/asiento-fc14-360.webp 360w, ./assets/catalogo/asiento-fc14-720.webp 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><img src="./assets/catalogo/asiento-fc14-360.webp" width="360" height="480" loading="lazy" decoding="async" alt="Forro de asiento verde y café con acolchado en rombos y franjas café"></picture></figure>
-        <figure class="catalog-card"><picture><source type="image/avif" srcset="./assets/catalogo/asiento-fc11-360.avif 360w, ./assets/catalogo/asiento-fc11-720.avif 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><source type="image/webp" srcset="./assets/catalogo/asiento-fc11-360.webp 360w, ./assets/catalogo/asiento-fc11-720.webp 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><img src="./assets/catalogo/asiento-fc11-360.webp" width="360" height="480" loading="lazy" decoding="async" alt="Forro de asiento negro y blanco con costura en X"></picture></figure>
-        <figure class="catalog-card"><picture><source type="image/avif" srcset="./assets/catalogo/asiento-fc22-360.avif 360w, ./assets/catalogo/asiento-fc22-720.avif 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><source type="image/webp" srcset="./assets/catalogo/asiento-fc22-360.webp 360w, ./assets/catalogo/asiento-fc22-720.webp 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><img src="./assets/catalogo/asiento-fc22-360.webp" width="360" height="480" loading="lazy" decoding="async" alt="Forro de asiento gris y camel con acolchado en V"></picture></figure>
-        <figure class="catalog-card"><picture><source type="image/avif" srcset="./assets/catalogo/asiento-fc43-360.avif 360w, ./assets/catalogo/asiento-fc43-720.avif 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><source type="image/webp" srcset="./assets/catalogo/asiento-fc43-360.webp 360w, ./assets/catalogo/asiento-fc43-720.webp 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><img src="./assets/catalogo/asiento-fc43-360.webp" width="360" height="480" loading="lazy" decoding="async" alt="Forro de asiento gris y negro con rombos en el respaldo"></picture></figure>
-        <figure class="catalog-card"><picture><source type="image/avif" srcset="./assets/catalogo/asiento-fc49c-360.avif 360w, ./assets/catalogo/asiento-fc49c-720.avif 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><source type="image/webp" srcset="./assets/catalogo/asiento-fc49c-360.webp 360w, ./assets/catalogo/asiento-fc49c-720.webp 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><img src="./assets/catalogo/asiento-fc49c-360.webp" width="360" height="480" loading="lazy" decoding="async" alt="Forro de asiento gris cálido con costuras diagonales y ribete blanco"></picture></figure>
-        <figure class="catalog-card"><picture><source type="image/avif" srcset="./assets/catalogo/asiento-fc55-360.avif 360w, ./assets/catalogo/asiento-fc55-720.avif 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><source type="image/webp" srcset="./assets/catalogo/asiento-fc55-360.webp 360w, ./assets/catalogo/asiento-fc55-720.webp 720w" sizes="(min-width: 900px) calc((100vw - 140px) / 4), calc((100vw - 56px) / 2)"><img src="./assets/catalogo/asiento-fc55-360.webp" width="360" height="480" loading="lazy" decoding="async" alt="Forro de asiento negro y gris con centro hexagonal y bordado Chevrolet Evolution"></picture></figure>
+      <div class="galeria-esfera" data-galeria-esfera>
+        <div class="ge-escena"><canvas tabindex="0" role="img" aria-label="Galería con los 58 diseños de forros del catálogo. Arrastra para mirar y toca un asiento para verlo grande."></canvas>
+        <div class="ge-botones"><button type="button" data-ge="vista" aria-label="Entrar o salir de la esfera"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4.5 2.3v4.4M2.3 4.5h4.4"/><circle cx="11.5" cy="4.5" r="2.2"/><rect x="2.4" y="9.4" width="4.2" height="4.2" rx="1"/><path d="m9.9 9.9 3.2 3.2m0-3.2-3.2 3.2"/></svg></button><button type="button" data-ge="repetir" aria-label="Repetir la animación"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.2A5.4 5.4 0 1 1 2.7 9.6"/><path d="M2.6 2.9 3 6.2l3.2-.5"/><path d="M6.8 5.8 10.4 8l-3.6 2.2Z" fill="currentColor" stroke="none"/></svg></button></div></div>
       </div>
       <div class="catalog-actions reveal"><a class="button button-primary catalog-button" href="./assets/catalogo/catalogo-forros-cuenca.pdf" target="_blank" rel="noopener">Ver catálogo</a></div>
     </section>
 
     <section class="services-section" id="servicios" aria-labelledby="services-title">
       <div class="services-copy reveal"><h2 id="services-title"><span class="line">¿QUÉ</span> <span class="line"><em>TAPIZAMOS?</em></span></h2><a href="#proceso">Conoce cómo trabajamos</a></div>
-      <div class="services-list reveal">
-        <details name="servicio" open><summary><strong>Forros de asientos</strong></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/asientos-480.avif 480w, ./assets/servicios/asientos-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/asientos-480.webp 480w, ./assets/servicios/asientos-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/asientos-960.webp" width="960" height="540" alt="Asiento con forro de cuero negro, costura roja doble y centro perforado por zonas" loading="lazy" decoding="async"></picture></figure></details>
-        <details name="servicio"><summary><strong>Volante</strong></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/volante-480.avif 480w, ./assets/servicios/volante-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/volante-480.webp 480w, ./assets/servicios/volante-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/volante-960.webp" width="960" height="540" alt="Volante forrado en cuero negro perforado con costura roja cruzada cosida a mano" loading="lazy" decoding="async"></picture></figure></details>
-        <details name="servicio"><summary><strong>Techos y cielo raso</strong></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/techos-480.avif 480w, ./assets/servicios/techos-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/techos-480.webp 480w, ./assets/servicios/techos-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/techos-960.webp" width="960" height="540" alt="Techo interior de un carro recién tapizado, liso y sin arrugas" loading="lazy" decoding="async"></picture></figure></details>
-        <details name="servicio"><summary><strong>Pisos a medida</strong></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/pisos-480.avif?v=2 480w, ./assets/servicios/pisos-960.avif?v=2 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/pisos-480.webp?v=2 480w, ./assets/servicios/pisos-960.webp?v=2 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/pisos-960.webp?v=2" width="960" height="540" alt="Juego de pisos a medida en cuero sintético negro acolchado en rombos con costura roja" loading="lazy" decoding="async"></picture></figure></details>
+      <div class="services-list dock-servicios reveal" data-dock-state="idle" data-dock-max="0.00">
+        <details name="servicio" open><summary><span class="servicio-boton" data-dock-item><strong>Forros de asientos</strong><span class="servicio-mas" aria-hidden="true"></span></span></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/asientos-480.avif 480w, ./assets/servicios/asientos-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/asientos-480.webp 480w, ./assets/servicios/asientos-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/asientos-960.webp" width="960" height="540" alt="Asiento con forro de cuero negro, costura roja doble y centro perforado por zonas" loading="lazy" decoding="async"></picture></figure></details>
+        <details name="servicio"><summary><span class="servicio-boton" data-dock-item><strong>Volante</strong><span class="servicio-mas" aria-hidden="true"></span></span></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/volante-480.avif 480w, ./assets/servicios/volante-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/volante-480.webp 480w, ./assets/servicios/volante-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/volante-960.webp" width="960" height="540" alt="Volante forrado en cuero negro perforado con costura roja cruzada cosida a mano" loading="lazy" decoding="async"></picture></figure></details>
+        <details name="servicio"><summary><span class="servicio-boton" data-dock-item><strong>Techos y cielo raso</strong><span class="servicio-mas" aria-hidden="true"></span></span></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/techos-480.avif 480w, ./assets/servicios/techos-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/techos-480.webp 480w, ./assets/servicios/techos-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/techos-960.webp" width="960" height="540" alt="Techo interior de un carro recién tapizado, liso y sin arrugas" loading="lazy" decoding="async"></picture></figure></details>
+        <details name="servicio"><summary><span class="servicio-boton" data-dock-item><strong>Pisos a medida</strong><span class="servicio-mas" aria-hidden="true"></span></span></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/pisos-480.avif?v=2 480w, ./assets/servicios/pisos-960.avif?v=2 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/pisos-480.webp?v=2 480w, ./assets/servicios/pisos-960.webp?v=2 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/pisos-960.webp?v=2" width="960" height="540" alt="Juego de pisos a medida en cuero sintético negro acolchado en rombos con costura roja" loading="lazy" decoding="async"></picture></figure></details>
       </div>
     </section>
 
@@ -232,7 +228,33 @@
             </div>
           </div>
           <div class="tm-pista" tabindex="0" role="region" aria-roledescription="carrusel" aria-labelledby="testimonios-titulo">
-            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="1 de 6">
+            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="1 de 4">
+              <div class="tm-cabeza">
+                <a class="tm-plataforma" href="https://maps.google.com/?cid=7286328883233782573" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>Google</a>
+                <span class="tm-fecha tm-fecha-movil">2026</span>
+              </div>
+              <div class="tm-cuerpo">
+                <blockquote><p><span class="tm-comilla">“</span>Me encantaron los <strong>diseños de forros</strong> que tienen y su material de cuero muy bueno, mi primer tapizado <strong>me duró 7 años</strong>. Los mejores en El Oro.<span class="tm-comilla">”</span></p></blockquote>
+                <figcaption class="tm-pie">
+                  <span class="tm-autor"><b>Jairo Méndez</b><span>Tapizado a medida · El Oro</span></span>
+                  <span class="tm-fecha">2026</span>
+                </figcaption>
+              </div>
+            </figure>
+            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="2 de 4">
+              <div class="tm-cabeza">
+                <a class="tm-plataforma" href="https://maps.google.com/?cid=7286328883233782573" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>Google</a>
+                <span class="tm-fecha tm-fecha-movil">2026</span>
+              </div>
+              <div class="tm-cuerpo">
+                <blockquote><p><span class="tm-comilla">“</span><strong>Excelente servicio</strong>, me gustaron mucho mis <strong>forros personalizados</strong> y quedaron a medida de mi carro.<span class="tm-comilla">”</span></p></blockquote>
+                <figcaption class="tm-pie">
+                  <span class="tm-autor"><b>Adriana Sánchez</b><span>Forros personalizados · Machala</span></span>
+                  <span class="tm-fecha">2026</span>
+                </figcaption>
+              </div>
+            </figure>
+            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="3 de 4">
               <div class="tm-cabeza">
                 <a class="tm-plataforma" href="https://www.facebook.com/Forroscuenca/reviews/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>Facebook</a>
                 <span class="tm-fecha tm-fecha-movil">2018</span>
@@ -245,68 +267,16 @@
                 </figcaption>
               </div>
             </figure>
-            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="2 de 6, ejemplo">
+            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="4 de 4">
               <div class="tm-cabeza">
-                <span class="tm-plataforma"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>Google<span class="tm-etiqueta">Ejemplo</span></span>
-                <span class="tm-fecha tm-fecha-movil">20XX</span>
+                <a class="tm-plataforma" href="https://maps.google.com/?cid=7286328883233782573" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>Google</a>
+                <span class="tm-fecha tm-fecha-movil">2023</span>
               </div>
               <div class="tm-cuerpo">
-                <blockquote><p><span class="tm-comilla">“</span>Texto de muestra: aquí va <strong>lo que escribió un cliente real</strong> sobre sus forros.<span class="tm-comilla">”</span></p></blockquote>
+                <blockquote><p><span class="tm-comilla">“</span><strong>Muy buen servicio</strong>, trabajo realizado al cliente con satisfacción. Cuenta con un <strong>personal capacitado e ideal</strong> para realizar la labor encomendada.<span class="tm-comilla">”</span></p></blockquote>
                 <figcaption class="tm-pie">
-                  <span class="tm-autor"><b>Nombre del cliente</b><span>Vehículo · Ciudad</span></span>
-                  <span class="tm-fecha">20XX</span>
-                </figcaption>
-              </div>
-            </figure>
-            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="3 de 6, ejemplo">
-              <div class="tm-cabeza">
-                <span class="tm-plataforma"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>Facebook<span class="tm-etiqueta">Ejemplo</span></span>
-                <span class="tm-fecha tm-fecha-movil">20XX</span>
-              </div>
-              <div class="tm-cuerpo">
-                <blockquote><p><span class="tm-comilla">“</span>Texto de muestra: la opinión de un cliente sobre <strong>el cuero y el acabado</strong> de su forro.<span class="tm-comilla">”</span></p></blockquote>
-                <figcaption class="tm-pie">
-                  <span class="tm-autor"><b>Nombre del cliente</b><span>Vehículo · Ciudad</span></span>
-                  <span class="tm-fecha">20XX</span>
-                </figcaption>
-              </div>
-            </figure>
-            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="4 de 6, ejemplo">
-              <div class="tm-cabeza">
-                <span class="tm-plataforma"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>Google<span class="tm-etiqueta">Ejemplo</span></span>
-                <span class="tm-fecha tm-fecha-movil">20XX</span>
-              </div>
-              <div class="tm-cuerpo">
-                <blockquote><p><span class="tm-comilla">“</span>Texto de muestra: lo que cuenta un taxista sobre <strong>cuánto le dura el forro</strong> en el trabajo diario.<span class="tm-comilla">”</span></p></blockquote>
-                <figcaption class="tm-pie">
-                  <span class="tm-autor"><b>Nombre del cliente</b><span>Vehículo · Ciudad</span></span>
-                  <span class="tm-fecha">20XX</span>
-                </figcaption>
-              </div>
-            </figure>
-            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="5 de 6, ejemplo">
-              <div class="tm-cabeza">
-                <span class="tm-plataforma"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>WhatsApp<span class="tm-etiqueta">Ejemplo</span></span>
-                <span class="tm-fecha tm-fecha-movil">20XX</span>
-              </div>
-              <div class="tm-cuerpo">
-                <blockquote><p><span class="tm-comilla">“</span>Texto de muestra: el mensaje de un cliente sobre <strong>la atención por WhatsApp</strong>, de la cotización a la entrega.<span class="tm-comilla">”</span></p></blockquote>
-                <figcaption class="tm-pie">
-                  <span class="tm-autor"><b>Nombre del cliente</b><span>Vehículo · Ciudad</span></span>
-                  <span class="tm-fecha">20XX</span>
-                </figcaption>
-              </div>
-            </figure>
-            <figure class="tm-resena" role="group" aria-roledescription="reseña" aria-label="6 de 6, ejemplo">
-              <div class="tm-cabeza">
-                <span class="tm-plataforma"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>Google<span class="tm-etiqueta">Ejemplo</span></span>
-                <span class="tm-fecha tm-fecha-movil">20XX</span>
-              </div>
-              <div class="tm-cuerpo">
-                <blockquote><p><span class="tm-comilla">“</span>Texto de muestra: la reseña de un cliente que recibió su forro <strong>en otra provincia</strong>.<span class="tm-comilla">”</span></p></blockquote>
-                <figcaption class="tm-pie">
-                  <span class="tm-autor"><b>Nombre del cliente</b><span>Vehículo · Ciudad</span></span>
-                  <span class="tm-fecha">20XX</span>
+                  <span class="tm-autor"><b>Ing. Jimmy Cueva</b><span>Local Guide · Machala</span></span>
+                  <span class="tm-fecha">2023</span>
                 </figcaption>
               </div>
             </figure>
@@ -316,6 +286,20 @@
     </section>
 
     <section class="process-section pasos" id="proceso" aria-labelledby="process-title"><div class="pasos-capa"><div class="pasos-fijo"><div class="pasos-palabras" aria-hidden="true"><div class="pasos-escenario"><div class="pasos-columna"><div class="paso-palabra"><span class="contorno">ESCRÍBENOS</span><span class="relleno">ESCRÍBENOS</span></div><div class="paso-palabra"><span class="contorno">EVALUAMOS</span><span class="relleno">EVALUAMOS</span></div><div class="paso-palabra"><span class="contorno">FABRICAMOS</span><span class="relleno">FABRICAMOS</span></div><div class="paso-palabra"><span class="contorno">ENTREGAMOS</span><span class="relleno">ENTREGAMOS</span></div></div></div></div><div class="pasos-copia"><h2 id="process-title">CÓMO TRABAJAMOS</h2><ol class="pasos-textos"><li class="paso-texto"><span class="paso-num">01 / 04 · Por WhatsApp</span><h3>Escríbenos</h3><hr><p>Mándanos la marca, el modelo y el año de tu carro. Te respondemos con colores, materiales y precio.</p><a class="paso-boton" href="#paso-2" data-ir="1">Siguiente paso</a></li><li class="paso-texto"><span class="paso-num">02 / 04 · Tu carro o asiento</span><h3>Evaluamos</h3><hr><p>Revisamos tus asientos, tomamos medidas y eliges con nosotros el cuero, el color y la costura.</p><a class="paso-boton" href="#paso-3" data-ir="2">Siguiente paso</a></li><li class="paso-texto"><span class="paso-num">03 / 04 · Forros a medida</span><h3>Fabricamos</h3><hr><p>Cortamos y cosemos tus forros a la medida exacta de tus asientos, aquí en nuestro taller de Machala.</p><a class="paso-boton" href="#paso-4" data-ir="3">Siguiente paso</a></li><li class="paso-texto"><span class="paso-num">04 / 04 · Ya instalados</span><h3>Entregamos</h3><hr><p>Te los entregamos instalados, bien ajustados y sin arrugas, listos para estrenar.</p><a class="paso-boton" href="#configurador">Diseña tu forro</a></li></ol></div><nav class="pasos-puntos" aria-label="Pasos de cómo trabajamos"><a href="#paso-1" data-ir="0" aria-label="Paso 1: Escríbenos"><i></i></a><a href="#paso-2" data-ir="1" aria-label="Paso 2: Evaluamos"><i></i></a><a href="#paso-3" data-ir="2" aria-label="Paso 3: Fabricamos"><i></i></a><a href="#paso-4" data-ir="3" aria-label="Paso 4: Entregamos"><i></i></a></nav></div></div><div class="paso" id="paso-1"><div class="paso-foto"><picture><source type="image/avif" srcset="./assets/proceso/pantalla-01-768.avif 768w, ./assets/proceso/pantalla-01-1376.avif 1376w" sizes="100vw"><source type="image/webp" srcset="./assets/proceso/pantalla-01-768.webp 768w, ./assets/proceso/pantalla-01-1376.webp 1376w" sizes="100vw"><img src="./assets/proceso/pantalla-01-1376.webp" width="1376" height="768" alt="Celular en un soporte sobre la mesa del taller con el chat de WhatsApp de Forros Cuenca: un cliente pide forros para su Toyota Hilux y recibe los colores de cuero" loading="lazy" decoding="async"></picture></div></div><div class="paso" id="paso-2"><div class="paso-foto"><picture><source type="image/avif" srcset="./assets/proceso/pantalla-02-768.avif 768w, ./assets/proceso/pantalla-02-1376.avif 1376w" sizes="100vw"><source type="image/webp" srcset="./assets/proceso/pantalla-02-768.webp 768w, ./assets/proceso/pantalla-02-1376.webp 1376w" sizes="100vw"><img src="./assets/proceso/pantalla-02-1376.webp" width="1376" height="768" alt="Tapicero midiendo con cinta métrica un asiento gastado, junto a un muestrario de cueros y una libreta" loading="lazy" decoding="async"></picture></div></div><div class="paso" id="paso-3"><div class="paso-foto"><picture><source type="image/avif" srcset="./assets/proceso/pantalla-03-768.avif 768w, ./assets/proceso/pantalla-03-1376.avif 1376w" sizes="100vw"><source type="image/webp" srcset="./assets/proceso/pantalla-03-768.webp 768w, ./assets/proceso/pantalla-03-1376.webp 1376w" sizes="100vw"><img src="./assets/proceso/pantalla-03-1376.webp" width="1376" height="768" alt="Tapicero joven cosiendo en máquina industrial un forro de cuero negro con costura roja" loading="lazy" decoding="async"></picture></div></div><div class="paso" id="paso-4"><div class="paso-foto"><picture><source type="image/avif" srcset="./assets/proceso/pantalla-04-768.avif 768w, ./assets/proceso/pantalla-04-1376.avif 1376w" sizes="100vw"><source type="image/webp" srcset="./assets/proceso/pantalla-04-768.webp 768w, ./assets/proceso/pantalla-04-1376.webp 1376w" sizes="100vw"><img src="./assets/proceso/pantalla-04-1376.webp" width="1376" height="768" alt="Manos ajustando un forro negro con costura roja ya instalado en el asiento delantero de un carro" loading="lazy" decoding="async"></picture></div></div></section>
+
+    <section class="elige-section" id="elige" aria-labelledby="elige-title">
+      <div class="elige-cabeza reveal"><h2 id="elige-title"><span class="line">ELIGE TU CARRO.</span> <span class="line"><em>MIRA TU FORRO.</em></span></h2><p>Escoge tu vehículo y un diseño: así queda el forro a medida en los asientos de tu carro.</p></div>
+      <div class="elige-app" data-elige>
+        <div class="elige-paso elige-paso-carro"><p class="elige-titulo"><b>1</b> Tu carro</p><div class="elige-selectores"><div class="vehicle-field"><label for="elige-marca">Marca</label><select id="elige-marca" data-elige-select="marca"><button><selectedcontent></selectedcontent></button></select></div><div class="vehicle-field"><label for="elige-modelo">Modelo</label><select id="elige-modelo" data-elige-select="modelo"><button><selectedcontent></selectedcontent></button></select></div><div class="vehicle-field"><label for="elige-anio">Año</label><select id="elige-anio" data-elige-select="anio"><button><selectedcontent></selectedcontent></button></select></div></div><p class="elige-referencia" hidden></p></div>
+        <figure class="elige-escena" aria-live="polite"><div class="elige-capa"><picture><source type="image/avif" sizes="(min-width: 1050px) 58vw, 100vw"><source type="image/webp" sizes="(min-width: 1050px) 58vw, 100vw"><img alt="" width="1440" height="960" decoding="async"></picture></div><div class="elige-capa"><picture><source type="image/avif" sizes="(min-width: 1050px) 58vw, 100vw"><source type="image/webp" sizes="(min-width: 1050px) 58vw, 100vw"><img alt="" width="1440" height="960" decoding="async"></picture></div><figcaption class="elige-rotulo"></figcaption></figure>
+        <div class="elige-paso elige-paso-diseno"><p class="elige-titulo"><b>2</b> El diseño</p><div class="elige-disenos" aria-label="Diseño del forro" role="group"></div>
+          <div class="elige-acciones"><button class="elige-cotizar" type="button">Cotizar este forro</button><a class="elige-personalizar" href="#configurador">Personalizar colores por zona</a></div>
+          <p class="elige-calma">¿No sabes cuál elegir? Escoge el que más te guste: por WhatsApp vemos fotos de tus asientos y ajustamos colores y costuras contigo antes de cortar.</p>
+          <p class="elige-nota">¿No está tu carro en la lista? <button class="elige-otro" type="button">Escríbenos</button>: hacemos forros a medida para todas las marcas.</p>
+          <p class="elige-aviso">Imágenes de referencia del diseño sobre el asiento de cada modelo.</p>
+        </div>
+      </div>
+    </section>
 
     <section class="configurator-section" id="configurador" aria-labelledby="configurator-title">
       <div class="configurator-intro reveal"><h2 id="configurator-title"><span class="line">DISEÑA TU FORRO.</span> <span class="line"><em>PARTE POR PARTE.</em></span></h2></div>
@@ -475,10 +459,12 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
   <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
-  <script type="module" src="./js/app.js?v=30"></script>
+  <script type="module" src="./js/app.js?v=31"></script>
   <script type="module" src="./js/hero.js?v=5"></script>
   <script type="module" src="./js/intro.js?v=5"></script>
-  <script type="module" src="./js/secciones.js?v=13"></script>
+  <script type="module" src="./js/secciones.js?v=17"></script>
   <script type="module" src="./js/testimonios.js?v=1"></script>
+  <script type="module" src="./js/galeria-esfera.js?v=4"></script>
+  <script type="module" src="./js/elige-carro.js?v=12"></script>
 </body>
 </html>

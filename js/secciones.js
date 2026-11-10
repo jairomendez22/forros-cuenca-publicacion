@@ -1,3 +1,5 @@
+import { createTopDockController } from "./top-dock.js?v=1";
+
 // Cómo trabajamos (estilo «Scrollable Images»): cada paso es una foto a pantalla completa. Encima queda fija la
 // columna de palabras grandes: sube con el scroll suavizado, se rellena la del paso que se ve y se inclina según
 // la velocidad. El texto del paso entra cuando la foto queda en su lugar.
@@ -100,8 +102,9 @@ if (resenas) {
   const ajustar = () => {
     const w = marco.clientWidth;
     const h = marco.clientHeight;
-    // llena el alto; en pantallas anchas también el ancho, recortando como mucho 60 px de alto
-    const s = Math.max(h / 506.6, Math.min(w / 900, (h + 60) / 506.6));
+    // llena el alto; en pantallas anchas también el ancho, recortando como mucho 60 px de alto.
+    // En celular, llenar el alto dejaba cada pieza más ancha que la pantalla: ahí va a 0.78 y se desliza.
+    const s = w < 700 ? Math.min(0.78, h / 506.6) : Math.max(h / 506.6, Math.min(w / 900, (h + 60) / 506.6));
     resenas.style.setProperty("--s", s.toFixed(3));
     ancho = Math.max(0, 900 * s - w);
   };
@@ -127,79 +130,30 @@ if (resenas) {
   }, { passive: true });
 }
 
-// Marca roja que se desliza al elemento señalado y, al soltar, vuelve al que está "en reposo"
-// (la sección que se ve, en el menú; el servicio abierto, en ¿Qué tapizamos?). Mismo gesto que los pasos.
-const marcaQueViaja = (contenedor, objetivos, enReposo) => {
-  const marca = document.createElement("span");
-  marca.className = "marca-viaja";
-  marca.setAttribute("aria-hidden", "true");
-  contenedor.prepend(marca);
-  contenedor.classList.add("con-marca");
-  let senalado = null;
-  const colocar = () => {
-    const el = senalado || enReposo();
-    if (!el || !el.offsetParent) {
-      marca.classList.remove("is-visible");
-      return;
-    }
-    const c = contenedor.getBoundingClientRect();
-    const r = el.getBoundingClientRect();
-    // si estaba oculta aparece en su sitio, sin viajar desde la esquina
-    marca.classList.toggle("sin-viaje", !marca.classList.contains("is-visible"));
-    marca.style.width = `${r.width}px`;
-    marca.style.height = `${r.height}px`;
-    marca.style.translate = `${r.left - c.left}px ${r.top - c.top}px`;
-    marca.classList.add("is-visible");
-  };
-  objetivos.forEach((el) => {
-    el.addEventListener("pointerenter", (evento) => {
-      if (evento.pointerType !== "mouse") return;
-      senalado = el;
-      colocar();
-    });
-    el.addEventListener("focus", () => {
-      if (!el.matches(":focus-visible")) return;
-      senalado = el;
-      colocar();
-    });
-    el.addEventListener("blur", () => {
-      senalado = null;
-      colocar();
-    });
-  });
-  contenedor.addEventListener("pointerleave", () => {
-    senalado = null;
-    colocar();
-  });
-  new ResizeObserver(colocar).observe(contenedor);
-  return colocar;
-};
-
+// Menú de arriba = dock «Sable» de ThreeUI (reemplaza la marca roja que viajaba). Mismos valores que el
+// uso configurado: proximity 122, spring 0.19, damping 0.70, widthGrowth 17, heightGrowth 16, drop 3.5.
 const menu = document.querySelector(".site-nav");
 if (menu) {
+  const opcionesDock = { proximity: 122, spring: 0.19, damping: 0.7, widthGrowth: 17, heightGrowth: 16, drop: 3.5, axis: "x", distribute: false, lockTrack: false };
+  createTopDockController(menu, () => opcionesDock);
+  // la sección que cruza la mitad de la pantalla queda marcada (chip claro, como el botón activo del dock)
   const enlaces = [...menu.querySelectorAll('a[href^="#"]')];
-  let seccionVista = null;
-  const colocar = marcaQueViaja(menu, enlaces, () => seccionVista);
   const porSeccion = new Map(enlaces.map((a) => [document.querySelector(a.getAttribute("href")), a]).filter(([s]) => s));
-  // la sección que cruza la mitad de la pantalla es la que se marca
   const vigia = new IntersectionObserver((entradas) => {
     entradas.forEach((e) => {
-      if (e.isIntersecting) seccionVista = porSeccion.get(e.target);
-      else if (porSeccion.get(e.target) === seccionVista) seccionVista = null;
+      const enlace = porSeccion.get(e.target);
+      if (e.isIntersecting) enlace.setAttribute("aria-current", "true");
+      else enlace.removeAttribute("aria-current");
     });
-    colocar();
   }, { rootMargin: "-50% 0px -50% 0px" });
   porSeccion.forEach((_, seccion) => vigia.observe(seccion));
 }
 
-const servicios = document.querySelector(".services-list");
+// ¿Qué tapizamos?: el mismo dock Sable en vertical (axis "y" del controlador): el botón cercano al mouse crece
+// en alto y se corre un poco al costado; el servicio abierto queda como chip claro (ver styles.css)
+const servicios = document.querySelector(".services-list.dock-servicios");
 if (servicios) {
-  const detalles = [...servicios.querySelectorAll("details")];
-  const colocar = marcaQueViaja(servicios, detalles.map((d) => d.querySelector("summary")), () => servicios.querySelector("details[open] > summary"));
-  detalles.forEach((d) => {
-    d.addEventListener("toggle", colocar);
-    new ResizeObserver(colocar).observe(d);
-  });
+  createTopDockController(servicios, () => ({ proximity: 122, spring: 0.19, damping: 0.7, widthGrowth: 17, heightGrowth: 16, drop: 3.5, axis: "y", distribute: false, lockTrack: false }));
 }
 
 // Botones de cotizar: crecen un poco y se acercan al mouse a medida que se acerca (aumento por cercanía y botón magnético)
@@ -298,6 +252,11 @@ const contextos = {
     return s ? { etiqueta: `Cotizar ${s.toLowerCase()}`, interes: s.toLowerCase() } : null;
   },
   configurador: () => ({ etiqueta: "Cotizar mi diseño", interes: "" }),
+  // Elige tu carro: el rótulo de la foto ya dice el carro y el diseño elegidos
+  elige: () => {
+    const elegido = document.querySelector(".elige-rotulo")?.textContent.trim();
+    return elegido ? { etiqueta: "Cotizar este forro", interes: `forros para ${elegido}` } : null;
+  },
 };
 if (botonMovil && "IntersectionObserver" in window) {
   let seccionActual = "";
@@ -320,4 +279,5 @@ if (botonMovil && "IntersectionObserver" in window) {
   }, { rootMargin: "-45% 0px -45% 0px" });
   document.querySelectorAll("main section[id]").forEach((s) => vigiaSecciones.observe(s));
   document.querySelectorAll(".services-list details").forEach((d) => d.addEventListener("toggle", aplicar));
+  document.addEventListener("elige:cambio", aplicar);
 }

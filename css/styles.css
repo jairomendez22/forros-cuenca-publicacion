@@ -716,6 +716,12 @@ a.catalog-button,.quote-button{animation:fc-latido 1.9s ease-in-out infinite,fc-
 .resena small{display:block;margin-top:2px;overflow:hidden;color:var(--muted);font-size:10px;letter-spacing:.08em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
 .resena-ejemplo{position:absolute;top:-4px;right:0;padding:2px 7px;border-radius:999px;background:#ffd35c;color:#111;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
 @media (prefers-reduced-motion:reduce){.pieza{opacity:1;transform:none}.resena{opacity:1}}
+/* celular: el título queda arriba, a la vista, y el rompecabezas (más chico) debajo */
+@media (max-width:699px){
+  .resenas-cabeza{bottom:auto;padding-top:26px}
+  .rompecabezas-marco{top:110px}
+  .resena small{font-size:13px}
+}
 /* letra de las reseñas: Playfair Display (libre, parecida a Mesagni, que es de pago) */
 .resena{font-family:"Playfair Display",Georgia,serif}
 .resena blockquote{font-size:17px;font-style:italic;line-height:1.38}
@@ -724,20 +730,8 @@ a.catalog-button,.quote-button{animation:fc-latido 1.9s ease-in-out infinite,fc-
 .resena-inicial{font-family:"Playfair Display",Georgia,serif;font-size:16px;font-style:italic;font-weight:600}
 .resena-estrellas{font-family:inherit}
 
-/* 2026-10-27 Marca roja que viaja (mismo gesto que los pasos de Cómo trabajamos): en el menú de arriba va al
-   enlace señalado o a la sección que se ve; en ¿Qué tapizamos? al servicio abierto. Los botones de cotizar
-   crecen al acercar el mouse. Lógica en js/secciones.js. */
-.con-marca{isolation:isolate}
-.services-list.con-marca{position:relative}
-@media (min-width:1050px){.site-nav.con-marca{position:relative;inset:auto}}
-.marca-viaja{position:absolute;z-index:-1;top:0;left:0;border:1px solid #e5091499;border-radius:999px;background:linear-gradient(180deg,#e509142e,#e509140a);box-shadow:0 10px 26px -14px #e50914;opacity:0;pointer-events:none;transition:translate .5s cubic-bezier(.3,1.25,.4,1),width .5s cubic-bezier(.3,1.25,.4,1),height .35s ease,opacity .25s ease}
-.marca-viaja.is-visible{opacity:1}
-.marca-viaja.sin-viaje{transition:opacity .25s ease}
-.services-list .marca-viaja{border-radius:12px}
-.site-nav.con-marca a[href]:not(:disabled):hover,.site-nav.con-marca a[href]:not(:disabled):focus-visible{color:#fff}
-@media (hover:hover) and (pointer:fine){.services-list.con-marca summary:hover strong{background:none;color:#fff}}
 :is(.hero .hero-primary,.site-header .header-quote,.closing-band .closing-button,.location-copy .map-link,.quote-button):not(:disabled){transition:color 180ms ease,outline-color 180ms ease,scale .2s ease-out}
-@media (prefers-reduced-motion:reduce){.marca-viaja{transition:opacity .2s ease}}
+
 
 /* 2026-10-28 Cómo trabajamos estilo «Scrollable Images» (~/Documents/threejs/imagenes-desplazables.html): una foto a
    pantalla completa por paso y, encima, fija mientras pasa la sección, la columna de palabras grandes que sube con el
@@ -841,3 +835,106 @@ body{overflow-x:clip;overflow-y:visible}
 
 /* overflow:clip y no hidden: hidden lo vuelve contenedor de scroll y la máscara por scroll (view()) se queda quieta */
 .detail-banner{overflow:clip}
+
+/* 2026-10-29 Menú de arriba = «AnimatedTopDock» de ThreeUI, variante Sable (threeui.css, revisión 5a736cd3…):
+   cápsula de vidrio oscuro cuyos botones se ensanchan y bajan con resorte cuando pasa el mouse (js/top-dock.js).
+   Medidas, colores y letra (Fragment Mono) del original; agregados de la casa: la sección que se ve queda como
+   el botón activo (chip claro), Cotizar va en rojo y el ícono se pone rojo al acercar el mouse. Solo en escritorio:
+   en celular sigue el menú desplegable. */
+.site-nav .animated-top-dock__icon{display:inline-flex;flex:none;align-items:center;justify-content:center;width:15px;height:15px}
+.site-nav .animated-top-dock__icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.site-nav a.animated-top-dock__item{gap:12px}
+@media (max-width:1049px){.site-nav .dock-cotizar{display:none}}
+@media (min-width:1050px){
+  .site-header .site-nav.animated-top-dock__nav{position:relative;inset:auto;display:flex;align-items:flex-start;gap:3px;height:38px;margin-left:auto;padding:4px;overflow:visible;border:1px solid #292929;border-radius:11px;background:rgba(14,14,14,.86);box-shadow:0 12px 34px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.035);backdrop-filter:blur(18px) saturate(75%);isolation:isolate}
+  .site-header .site-nav .animated-top-dock__item[data-dock-item]{position:relative;z-index:6;display:inline-flex;flex:none;align-items:center;justify-content:center;gap:6px;height:28px;min-width:0;min-height:0;padding:0 11px;border:1px solid transparent;border-radius:7px;outline:none;color:#858580;background:rgba(21,21,20,.9);box-shadow:none;font:400 10px/1 "ThreeUI Fragment Mono",ui-monospace,monospace;letter-spacing:.1em;text-decoration:none;text-transform:uppercase;white-space:nowrap;backdrop-filter:blur(14px) saturate(70%);transform-origin:50% 0;transition:color .15s,border-color .18s,background .18s,box-shadow .18s;will-change:width,height,transform;cursor:pointer}
+  .site-header .site-nav .animated-top-dock__item[data-dock-item]:is([data-dock-near="true"],:focus-visible){z-index:7;color:#ecece8;border-color:#41413e;background:rgba(27,27,26,.94);box-shadow:0 7px 16px rgba(0,0,0,.26)}
+  .site-header .site-nav .animated-top-dock__item[data-dock-item][aria-current="true"]{color:#111;border-color:#e8e8e3;background:#e8e8e3;box-shadow:0 7px 18px rgba(0,0,0,.28)}
+  .site-header .site-nav .animated-top-dock__item.dock-cotizar[data-dock-item]{color:#fff;border-color:var(--red);background:var(--red)}
+  .site-header .site-nav .animated-top-dock__item.dock-cotizar[data-dock-item]:is([data-dock-near="true"],:focus-visible,:hover){color:#fff;border-color:#ff1f2c;background:#ff1f2c;box-shadow:0 7px 18px rgba(229,9,20,.35)}
+  .site-header .site-nav .animated-top-dock__icon{width:13px;height:13px;opacity:.62;transition:opacity .16s,color .16s}
+  .site-header .site-nav .animated-top-dock__item:is([data-dock-near="true"],:focus-visible) .animated-top-dock__icon{opacity:1}
+  .site-header .site-nav a.animated-top-dock__item:is(:hover,:focus-visible):not([aria-current="true"]) .animated-top-dock__icon{color:#ff4b55}
+  .site-header .site-nav .dock-cotizar .animated-top-dock__icon{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){.site-header .site-nav .animated-top-dock__item[data-dock-item]{transform:none!important}}
+
+/* 2026-10-29 ¿Qué tapizamos? con el dock Sable de ThreeUI en vertical (mismo resorte que el menú): cápsula de
+   vidrio oscuro, botones con letra Fragment Mono, el cercano al mouse crece y se corre al costado, el abierto
+   queda como chip claro. Reemplaza el recuadro rojo con brillo que viajaba al servicio abierto.
+   El botón (.servicio-boton) es una capa absoluta dentro de su fila de alto fijo y crece hacia arriba y abajo
+   sin mover la lista: si la lista creciera, cambiaría el alto de la sección y el controlador se reiniciaría en
+   cada cuadro (el mismo caso que advierte topDockController.ts con data-dock-frame). */
+.services-section .services-list.dock-servicios{display:grid;gap:4px;padding:6px;border:1px solid #292929;border-radius:16px;background:rgba(14,14,14,.86);box-shadow:0 12px 34px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.035);backdrop-filter:blur(18px) saturate(75%)}
+.services-section .dock-servicios details{border:0}
+.services-section .dock-servicios summary{position:relative;display:block;height:60px;min-height:0;padding:0;border:0;border-radius:11px;background:none;outline:none;cursor:pointer}
+.services-section .dock-servicios summary::after{display:none}
+.services-section .dock-servicios .servicio-boton{position:absolute;z-index:6;top:0;right:0;bottom:0;left:0;display:grid;grid-template-columns:1fr 30px;align-items:center;gap:12px;height:60px;margin-block:auto;padding:0 14px 0 18px;border:1px solid transparent;border-radius:11px;color:#858580;background:rgba(21,21,20,.9);transform-origin:0 50%;transition:color .15s,border-color .18s,background .18s,box-shadow .18s;will-change:height,transform}
+.services-section .dock-servicios .servicio-boton strong{justify-self:start;margin:0;padding:0;border-radius:0;background:none;color:inherit;font:400 clamp(12px,3.4vw,14px)/1.2 "ThreeUI Fragment Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}
+.services-section .dock-servicios .servicio-mas{position:relative;width:30px;height:30px;border:1px solid #41413e;border-radius:8px;background:rgba(27,27,26,.94);transition:border-color .18s,background .18s}
+/* 2026-10-30 Íconos Phosphor (MIT, © Phosphor Icons, vía Iconify): dos ph:minus-bold forman ph:plus-bold; al abrir,
+   la raya vertical se acuesta y queda ph:minus-bold (la «×» se leía como cerrar o borrar). Sin flechas, regla del dueño. */
+.services-section .dock-servicios .servicio-mas{--ph-minus:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M228 128a12 12 0 0 1-12 12H40a12 12 0 0 1 0-24h176a12 12 0 0 1 12 12'/%3E%3C/svg%3E")}
+.services-section .dock-servicios .servicio-mas::before,.services-section .dock-servicios .servicio-mas::after{position:absolute;top:50%;left:50%;width:16px;height:16px;background:currentColor;content:"";-webkit-mask:var(--ph-minus) center/contain no-repeat;mask:var(--ph-minus) center/contain no-repeat;translate:-50% -50%;transition:rotate .18s ease}
+.services-section .dock-servicios .servicio-mas::after{rotate:90deg}
+.services-section .dock-servicios details[open] .servicio-mas::after{rotate:180deg}
+.services-section .dock-servicios :is(.servicio-boton[data-dock-near="true"],summary:hover .servicio-boton,summary:focus-visible .servicio-boton){z-index:7;color:#ecece8;border-color:#41413e;background:rgba(27,27,26,.94);box-shadow:0 7px 16px rgba(0,0,0,.26)}
+.services-section .dock-servicios details:not([open]) :is(summary:hover,summary:focus-visible) .servicio-mas{border-color:var(--red);background:var(--red);color:#fff}
+.services-section .dock-servicios summary:focus-visible .servicio-boton{outline:2px solid #fff;outline-offset:2px}
+.services-section .dock-servicios details[open] .servicio-boton{color:#111;border-color:#e8e8e3;background:#e8e8e3;box-shadow:0 7px 18px rgba(0,0,0,.28)}
+.services-section .dock-servicios details[open] .servicio-mas{border-color:#111;background:#111;color:#fff}
+.services-section .dock-servicios .servicio-foto{margin:6px 6px 10px;border-color:#292929;border-radius:11px}
+@media (prefers-reduced-motion:reduce){.services-section .dock-servicios .servicio-boton{transform:none!important}.services-section .dock-servicios .servicio-mas::after{transition:none}}
+
+/* 2026-10-29 Elige tu carro (idea de Katzkin «Choose your design», para carros de Ecuador): el cliente escoge
+   su carro y un diseño, y ve una foto del asiento de ESE carro con ese forro. Lógica en js/elige-carro.js. */
+.elige-section{padding:78px 18px;background:radial-gradient(circle at 85% 0,#2a1a1c,transparent 30rem),#0b0c0f;scroll-margin-top:var(--header-h)}
+.elige-cabeza h2{margin:0;font-family:var(--display);font-size:clamp(2.8rem,11vw,6rem);font-weight:700;line-height:.92;letter-spacing:-.035em;text-transform:uppercase}
+.elige-cabeza h2 em{color:var(--red-bright);font-family:"Poppins",sans-serif;font-size:.72em;font-style:italic;font-weight:800;letter-spacing:-.06em}
+.elige-cabeza p{max-width:520px;margin:20px 0 0;color:#c9cbd1;font-size:15px;line-height:1.6}
+.elige-app{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;margin-top:34px;grid-template-areas:"carro" "escena" "diseno"}
+.elige-paso-carro{grid-area:carro}.elige-escena{grid-area:escena}.elige-paso-diseno{grid-area:diseno}
+.elige-titulo{display:flex;align-items:center;gap:10px;margin:0 0 12px;color:#fff;font:400 12px/1 "ThreeUI Fragment Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}
+.elige-titulo b{display:grid;width:24px;height:24px;place-items:center;border-radius:50%;background:var(--red);font-weight:400}
+@media (max-width:559px){.elige-diseno small{display:none}.elige-diseno{min-height:54px}}
+.elige-diseno{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 14px;border:1px solid #2c2e35;border-radius:12px;background:#15161a;color:#c9cbd1;cursor:pointer;font:inherit;text-align:left;transition:border-color .18s,background .18s,color .18s}
+.elige-diseno strong{display:block;color:#fff;font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:.01em;text-transform:uppercase}
+.elige-diseno small{display:block;margin-top:3px;color:#9fa1a8;font-size:12px}
+.elige-diseno[aria-pressed="true"]{border-color:var(--red);background:linear-gradient(180deg,#e509142b,#e509140d);color:#fff}
+@media (hover:hover) and (pointer:fine){.elige-diseno:hover{border-color:#ff1f2c;color:#fff}}
+.elige-diseno:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.elige-escena{position:relative;overflow:hidden;margin:0;aspect-ratio:3/2;border:1px solid #2c2e35;border-radius:18px;background:#15161a}
+.elige-capa{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+.elige-capa.is-visible{opacity:1}
+.elige-capa picture,.elige-capa img{display:block;width:100%;height:100%}
+.elige-capa img{object-fit:cover}
+.elige-capa img:not([src]){visibility:hidden}
+.elige-rotulo{position:absolute;bottom:12px;left:12px;padding:7px 12px;border-radius:999px;background:#0b0c0fcc;color:#fff;font:400 11px/1 "ThreeUI Fragment Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;backdrop-filter:blur(8px)}
+.elige-rotulo:empty{display:none}
+.elige-disenos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.elige-diseno{align-items:center}
+.elige-muestra{flex:none;width:30px;height:30px;border:1px solid #ffffff2e;border-radius:50%;background:linear-gradient(135deg,var(--c1) 50%,var(--c2) 50%)}
+.elige-diseno strong{font-size:15px}
+.elige-diseno small{font-size:11px;line-height:1.3}
+.elige-acciones{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin-top:18px}
+.elige-cotizar{min-height:52px;padding:12px 24px;border:0;border-radius:999px;background:var(--red);color:#fff;cursor:pointer;font:700 14px/1 "Poppins",sans-serif;transition:background-color .18s}
+.elige-cotizar:hover{background:#ff1f2c}
+.elige-personalizar{display:inline-flex;min-height:48px;align-items:center;color:#fff;font-size:13px;font-weight:700;text-decoration:none}
+.elige-personalizar:hover{color:#ff1f2c}
+.elige-nota{margin:16px 0 0;color:#c9cbd1;font-size:13px;line-height:1.5}
+.elige-calma{margin:16px 0 0;padding:12px 14px;border-left:2px solid var(--red);color:#e3e4e8;font-size:13px;line-height:1.55}
+.elige-otro{min-height:32px;padding:0 2px;border:0;background:none;color:#fff;cursor:pointer;font:inherit;font-weight:700}
+.elige-otro:hover{color:#ff1f2c}
+.elige-aviso{margin:6px 0 0;color:#7d8087;font-size:11px}
+@media (min-width:560px){.elige-section{padding-inline:36px}}
+.elige-selectores{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.elige-selectores .vehicle-field:first-child{grid-column:1/-1}
+.elige-referencia{margin:12px 0 0;padding:10px 12px;border-left:2px solid var(--red);background:#15161a;color:#c9cbd1;font-size:13px;line-height:1.5}
+@media (min-width:560px){.elige-selectores{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) minmax(0,.8fr)}.elige-selectores .vehicle-field:first-child{grid-column:auto}}
+@media (min-width:1050px){
+  .elige-section{padding:110px max(36px,calc((100vw - 1360px)/2))}
+  .elige-app{grid-template-columns:minmax(0,1.45fr) minmax(340px,.8fr);grid-template-areas:"escena carro" "escena diseno";align-items:start;column-gap:40px;row-gap:28px}
+  .elige-escena{position:sticky;top:110px}
+  .elige-selectores{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.elige-selectores .vehicle-field:first-child{grid-column:1/-1}
+}
+@media (prefers-reduced-motion:reduce){.elige-capa{transition:none}}

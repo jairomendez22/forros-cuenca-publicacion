@@ -169,6 +169,8 @@ function buildWhatsAppMessage() {
 
   // lo que el cliente estaba viendo al tocar el botón (js/secciones.js lo deja en <html data-interes>)
   const interes = document.documentElement.dataset.interes;
+  // desde «Elige tu carro» el pedido es ese carro con ese diseño, no la orden del diseñador
+  if (interes?.startsWith("forros para ")) return `Hola, Forros Cuenca. Quiero cotizar ${interes}. ¿Me pasan el precio?`;
   return [
     "Hola, Forros Cuenca. Quiero cotizar esta orden de tapizado:", "",
     ...(interes ? [`Me interesa: ${interes}`, ""] : []),

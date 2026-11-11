@@ -1,8 +1,13 @@
 // Decide antes del primer pintado si se muestra la intro de la portada, para que el sitio no destelle detrás.
 // Sin JS, con «reducir movimiento», con un diseño compartido (?diseno=) o con un ancla (#…) se entra directo.
 (function () {
+  // GitHub Pages no envía X-Frame-Options ni frame-ancestors. Si otra página mete el sitio
+  // en un marco, se oculta el contenido (para que no se pueda montar un engaño encima) y
+  // se intenta salir del marco. Si la salida funciona, la página se carga normal arriba.
   if (window.top !== window.self) {
+    document.documentElement.style.display = "none";
     try { window.top.location = window.location.href; } catch (error) { /* El navegador puede bloquear la navegación entre orígenes. */ }
+    return;
   }
   var doc = document.documentElement;
   try {

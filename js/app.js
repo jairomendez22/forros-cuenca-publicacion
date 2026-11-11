@@ -7,6 +7,11 @@ import {
   announce, bindView, exportDesignPng, render, showToast,
 } from "./view.js?v=10";
 
+// El configurador puede estar oculto (atributo «hidden» en #configurador, pedido del dueño del 11-nov-2026).
+// Oculto: no se avisa de diseños recuperados, no se toca la URL y WhatsApp manda un mensaje simple.
+const seccionConfigurador = document.getElementById("configurador");
+const CONFIGURADOR = Boolean(seccionConfigurador && !seccionConfigurador.hidden);
+
 const loaded = loadConfig();
 const config = loaded.config;
 const ui = { activePart: "back", activeTab: "color" };
@@ -88,8 +93,8 @@ if (escenario && "IntersectionObserver" in window) {
 }
 
 renderAll();
-if (loaded.warning) showToast(loaded.warning);
-else if (loaded.source === "local") showToast("Recuperamos tu último diseño guardado en este dispositivo.");
+if (CONFIGURADOR && loaded.warning) showToast(loaded.warning);
+else if (CONFIGURADOR && loaded.source === "local") showToast("Recuperamos tu último diseño guardado en este dispositivo.");
 
 function commit(message) {
   persistConfig(config);
@@ -150,7 +155,7 @@ async function copyText(value) {
 }
 
 function openWhatsApp() {
-  persistConfig(config);
+  if (CONFIGURADOR) persistConfig(config);
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage())}`;
   window.open(url, "_blank", "noopener,noreferrer");
 }
@@ -171,6 +176,8 @@ function buildWhatsAppMessage() {
   const interes = document.documentElement.dataset.interes;
   // desde «Elige tu carro» el pedido es ese carro con ese diseño, no la orden del diseñador
   if (interes?.startsWith("forros para ")) return `Hola, Forros Cuenca. Quiero cotizar ${interes}. ¿Me pasan el precio?`;
+  // sin configurador no hay orden de diseño que mandar
+  if (!CONFIGURADOR) return interes ? `Hola, Forros Cuenca. Quiero cotizar ${interes}. ¿Me pasan el precio?` : "Hola, Forros Cuenca. Quiero cotizar forros para mi carro. ¿Me ayudan?";
   return [
     "Hola, Forros Cuenca. Quiero cotizar esta orden de tapizado:", "",
     ...(interes ? [`Me interesa: ${interes}`, ""] : []),

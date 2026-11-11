@@ -1,8 +1,9 @@
 /* Galería en esfera de «Un estilo para cada vehículo» (js/galeria-esfera.js). */
 :root{--ge-fondo:#efece6;--ge-marco:#dcd7ce;--ge-marco-grande:#e2ded6}
 .works-section{background:var(--ge-fondo)}
-/* La galería es un recorrido largo; la escena queda fija mientras el scroll hace aparecer las fotos y meter la cámara. */
-.galeria-esfera{position:relative;height:280svh;margin:34px calc(50% - 50vw) 0;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+/* La galería es un recorrido largo; la escena queda fija mientras el scroll hace aparecer las fotos y meter la cámara.
+   2026-11-11: de 280svh a 220svh (la escena fija pasa de 1,8 a 1,2 pantallas) para que el scroll fluya más. */
+.galeria-esfera{position:relative;height:220svh;margin:34px calc(50% - 50vw) 0;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 .ge-escena{position:sticky;top:0;height:100svh}
 .galeria-esfera.ge-sin-webgl{height:clamp(420px,88svh,62vw + 260px)}
 @media (prefers-reduced-motion:reduce){.galeria-esfera{height:clamp(420px,88svh,62vw + 260px)}.ge-escena{position:relative;height:100%}}

@@ -725,8 +725,9 @@ a.catalog-button,.quote-button{animation:fc-latido 1.9s ease-in-out infinite,fc-
 
 /* 2026-10-28 Cómo trabajamos estilo «Scrollable Images» (~/Documents/threejs/imagenes-desplazables.html): una foto a
    pantalla completa por paso y, encima, fija mientras pasa la sección, la columna de palabras grandes que sube con el
-   scroll y se inclina según la velocidad, el texto del paso arriba a la izquierda y los puntos. Lógica en js/secciones.js. */
-html:has(.pasos){scroll-snap-type:y proximity}
+   scroll y se inclina según la velocidad, el texto del paso arriba a la izquierda y los puntos. Lógica en js/secciones.js.
+   2026-11-11: sin imán de scroll en la página (scroll-snap-type:y proximity). Jairo: «que fluya más y que no se quede
+   estancado». Medido en Chrome: bajar 300 px dentro de la sección devolvía la página al mismo lugar. */
 .process-section.pasos{--pasos-top:var(--header-h);--fs:min(21vh,15vw);position:relative;padding:0;background:#0b0c0f}
 @media (min-width:900px){.process-section.pasos{--pasos-top:86px}}
 .paso{position:relative;height:calc(100svh - var(--pasos-top));overflow:hidden;background:#151311;scroll-snap-align:start;scroll-margin-top:calc(var(--pasos-top) - var(--header-h))}
@@ -769,7 +770,7 @@ html:has(.pasos){scroll-snap-type:y proximity}
 .pasos-puntos a[aria-current="step"] i{background:#fff;transform:scale(1.55)}
 @media (min-width:560px){.pasos-copia{left:36px}.pasos-puntos{left:10px}}
 @media (min-width:1050px){.pasos-copia{top:44px;left:max(36px,calc((100vw - 1360px)/2))}.paso-texto p{font-size:16px}#paso-4 .paso-foto img{object-position:50% 50%}}
-@media (prefers-reduced-motion:reduce){html:has(.pasos){scroll-snap-type:none}.pasos-js .paso-texto>*{transform:none;transition:opacity .3s}.pasos-puntos i{transition:none}}
+@media (prefers-reduced-motion:reduce){.pasos-js .paso-texto>*{transform:none;transition:opacity .3s}.pasos-puntos i{transition:none}}
 
 /* el body no debe ser contenedor de scroll (en escritorio html tiene overflow:auto), si no la sección no se queda fija */
 body{overflow-x:clip;overflow-y:visible}

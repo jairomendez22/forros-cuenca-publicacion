@@ -47,6 +47,7 @@ if (pasosSeccion) {
   let actual = scrollY;
   let inclinacion = 0;
   let quietoDesde = 0;
+  let ultimoDestino = scrollY;
   let cuadro = 0;
   const paso = (ahora) => {
     const destino = scrollY;
@@ -73,9 +74,10 @@ if (pasosSeccion) {
     const real = (destino - arriba) / altoPaso;
     const activo = limitar(Math.round(real), 0, ultimo);
     puntos.forEach((a, i) => { if (i === activo) a.setAttribute("aria-current", "step"); else a.removeAttribute("aria-current"); });
-    // el texto entra con la foto en su lugar, o si el scroll se detiene a medio camino
-    if (Math.abs(velocidad) > 0.5) quietoDesde = ahora;
-    if (Math.abs(real - Math.round(real)) < 0.12 || ahora - quietoDesde > 250) mostrarTexto(activo);
+    // el texto entra con la foto en su lugar, o apenas el scroll se detiene a medio camino. Desde el 11-nov ya no hay
+    // imán que deje la foto alineada: se mira el scroll real, no la columna suavizada (tardaba ~1,1 s en aparecer)
+    if (destino !== ultimoDestino) { quietoDesde = ahora; ultimoDestino = destino; }
+    if (Math.abs(real - Math.round(real)) < 0.12 || ahora - quietoDesde > 150) mostrarTexto(activo);
     else if (mostrado >= 0) mostrarTexto(-1);
 
     cuadro = requestAnimationFrame(paso);

@@ -53,25 +53,9 @@ function mount() {
   const master = intro.animate([{ opacity: 1 }, { opacity: 1 }], { duration: T.end, fill: "forwards" });
   anims.push(master);
 
-  // Pseudoaleatorio con semilla: el glitch es igual en cada visita.
+  // Pseudoaleatorio con semilla: el grano y los bloques son iguales en cada visita.
   let seed = 7;
   const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
-  const glitch = (el, start, duration, amp, steps = 8) => {
-    const kf = [];
-    for (let i = 0; i <= steps; i++) {
-      const last = i === steps;
-      const top = Math.round(rnd() * 80);
-      const frame = {
-        offset: i / steps,
-        easing: "steps(1, end)",
-        opacity: last || i === 0 ? 0 : rnd() > 0.25 ? 0.9 : 0,
-        transform: last ? "none" : `translate(${((rnd() - 0.5) * 2 * amp).toFixed(1)}px, ${((rnd() - 0.5) * amp * 0.3).toFixed(1)}px)`,
-      };
-      if (!lite) frame.clipPath = last ? "inset(0 0 0 0)" : `inset(${top}% 0 ${Math.max(0, 100 - top - 10 - Math.round(rnd() * 30))}% 0)`;
-      kf.push(frame);
-    }
-    return A(el, kf, start, duration, "linear");
-  };
 
   // Grano: ruido generado una sola vez y desplazado por CSS.
   const noise = document.createElement("canvas");
@@ -130,7 +114,7 @@ function mount() {
     { opacity: 1, transform: "scale(1)", filter: "brightness(1)" },
   ], T.logo, 520);
   A(logo, [{ transform: "scale(1)" }, { transform: "scale(1.035)" }], T.logo + 520, T.end - T.logo - 520, "linear", "forwards");
-  $$(".i-logo-ghost").forEach((ghost, i) => glitch(ghost, T.logo + i * 40, 380, 18));
+  // Sin copias del logo con interferencia: en celulares en modo liviano (sin recorte) se veía el logo doble.
   const pix = $(".i-pix");
   for (let i = 0; i < 96; i++) {
     const block = document.createElement("i");

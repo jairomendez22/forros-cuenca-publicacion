@@ -35,9 +35,9 @@
   <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/fragment-mono.woff2" crossorigin>
   <link rel="preload" as="image" type="image/avif" imagesrcset="./assets/portada/forro-01-480.avif 480w, ./assets/portada/forro-01-860.avif 860w" imagesizes="(min-width: 1050px) 472px, (min-width: 900px) 248px, (min-width: 390px) 352px, calc(100vw - 36px)" fetchpriority="high">
   <link rel="stylesheet" href="./css/fonts.css?v=3">
-  <link rel="stylesheet" href="./css/styles.css?v=72">
+  <link rel="stylesheet" href="./css/styles.css?v=73">
   <link rel="stylesheet" href="./css/testimonios.css?v=1">
-  <link rel="stylesheet" href="./css/intro.css?v=5">
+  <link rel="stylesheet" href="./css/intro.css?v=6">
   <link rel="stylesheet" href="./css/galeria-esfera.css?v=2">
   <script type="application/ld+json">
   {
@@ -117,8 +117,6 @@
         <i class="i-glow"></i>
         <div class="i-logo">
           <img src="./assets/intro/logo-forros-cuenca-360.webp" srcset="./assets/intro/logo-forros-cuenca-360.webp 360w, ./assets/intro/logo-forros-cuenca-720.webp 720w" sizes="(min-aspect-ratio: 1/1) min(40vw, 52vh, 440px), min(72vw, 46vh, 420px)" width="360" height="377" alt="" decoding="async">
-          <img class="i-logo-ghost r" src="./assets/intro/logo-forros-cuenca-360.webp" width="360" height="377" alt="">
-          <img class="i-logo-ghost c" src="./assets/intro/logo-forros-cuenca-360.webp" width="360" height="377" alt="">
           <span class="i-shine"><i></i></span>
           <span class="i-pix"></span>
         </div>
@@ -191,12 +189,12 @@
 
     <section class="services-section" id="servicios" aria-labelledby="services-title">
       <div class="services-copy reveal"><h2 id="services-title"><span class="line">¿QUÉ</span> <span class="line"><em>TAPIZAMOS?</em></span></h2><a href="#proceso">Conoce cómo trabajamos</a></div>
-      <div class="services-list dock-servicios reveal" data-dock-state="idle" data-dock-max="0.00">
-        <details name="servicio" open><summary><span class="servicio-boton" data-dock-item><strong>Forros de asientos</strong><span class="servicio-mas" aria-hidden="true"></span></span></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/asientos-480.avif 480w, ./assets/servicios/asientos-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/asientos-480.webp 480w, ./assets/servicios/asientos-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/asientos-960.webp" width="960" height="540" alt="Asiento con forro de cuero negro, costura roja doble y centro perforado por zonas" loading="lazy" decoding="async"></picture></figure></details>
-        <details name="servicio"><summary><span class="servicio-boton" data-dock-item><strong>Volante</strong><span class="servicio-mas" aria-hidden="true"></span></span></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/volante-480.avif 480w, ./assets/servicios/volante-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/volante-480.webp 480w, ./assets/servicios/volante-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/volante-960.webp" width="960" height="540" alt="Volante forrado en cuero negro perforado con costura roja cruzada cosida a mano" loading="lazy" decoding="async"></picture></figure></details>
-        <details name="servicio"><summary><span class="servicio-boton" data-dock-item><strong>Techos y cielo raso</strong><span class="servicio-mas" aria-hidden="true"></span></span></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/techos-480.avif 480w, ./assets/servicios/techos-960.avif 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/techos-480.webp 480w, ./assets/servicios/techos-960.webp 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/techos-960.webp" width="960" height="540" alt="Techo interior de un carro recién tapizado, liso y sin arrugas" loading="lazy" decoding="async"></picture></figure></details>
-        <details name="servicio"><summary><span class="servicio-boton" data-dock-item><strong>Pisos a medida</strong><span class="servicio-mas" aria-hidden="true"></span></span></summary><figure class="servicio-foto"><picture><source type="image/avif" srcset="./assets/servicios/pisos-480.avif?v=2 480w, ./assets/servicios/pisos-960.avif?v=2 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/pisos-480.webp?v=2 480w, ./assets/servicios/pisos-960.webp?v=2 960w" sizes="(min-width: 1050px) 50vw, calc(100vw - 60px)"><img src="./assets/servicios/pisos-960.webp?v=2" width="960" height="540" alt="Juego de pisos a medida en cuero sintético negro acolchado en rombos con costura roja" loading="lazy" decoding="async"></picture></figure></details>
-      </div>
+      <ul class="services-list servicios-grid reveal" aria-label="Servicios de tapizado">
+        <li class="servicio"><figure><picture><source type="image/avif" srcset="./assets/servicios/asientos-480.avif 480w, ./assets/servicios/asientos-960.avif 960w" sizes="(min-width: 1050px) 26vw, (min-width: 560px) 45vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/asientos-480.webp 480w, ./assets/servicios/asientos-960.webp 960w" sizes="(min-width: 1050px) 26vw, (min-width: 560px) 45vw, calc(100vw - 60px)"><img src="./assets/servicios/asientos-960.webp" width="960" height="540" alt="Asiento con forro de cuero negro, costura roja doble y centro perforado por zonas" loading="lazy" decoding="async"></picture><figcaption>Forros de asientos</figcaption></figure></li>
+        <li class="servicio"><figure><picture><source type="image/avif" srcset="./assets/servicios/volante-480.avif 480w, ./assets/servicios/volante-960.avif 960w" sizes="(min-width: 1050px) 26vw, (min-width: 560px) 45vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/volante-480.webp 480w, ./assets/servicios/volante-960.webp 960w" sizes="(min-width: 1050px) 26vw, (min-width: 560px) 45vw, calc(100vw - 60px)"><img src="./assets/servicios/volante-960.webp" width="960" height="540" alt="Volante forrado en cuero negro perforado con costura roja cruzada cosida a mano" loading="lazy" decoding="async"></picture><figcaption>Volante</figcaption></figure></li>
+        <li class="servicio"><figure><picture><source type="image/avif" srcset="./assets/servicios/techos-480.avif 480w, ./assets/servicios/techos-960.avif 960w" sizes="(min-width: 1050px) 26vw, (min-width: 560px) 45vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/techos-480.webp 480w, ./assets/servicios/techos-960.webp 960w" sizes="(min-width: 1050px) 26vw, (min-width: 560px) 45vw, calc(100vw - 60px)"><img src="./assets/servicios/techos-960.webp" width="960" height="540" alt="Techo interior de un carro recién tapizado, liso y sin arrugas" loading="lazy" decoding="async"></picture><figcaption>Techos y cielo raso</figcaption></figure></li>
+        <li class="servicio"><figure><picture><source type="image/avif" srcset="./assets/servicios/pisos-480.avif?v=2 480w, ./assets/servicios/pisos-960.avif?v=2 960w" sizes="(min-width: 1050px) 26vw, (min-width: 560px) 45vw, calc(100vw - 60px)"><source type="image/webp" srcset="./assets/servicios/pisos-480.webp?v=2 480w, ./assets/servicios/pisos-960.webp?v=2 960w" sizes="(min-width: 1050px) 26vw, (min-width: 560px) 45vw, calc(100vw - 60px)"><img src="./assets/servicios/pisos-960.webp?v=2" width="960" height="540" alt="Juego de pisos a medida en cuero sintético negro acolchado en rombos con costura roja" loading="lazy" decoding="async"></picture><figcaption>Pisos a medida</figcaption></figure></li>
+      </ul>
     </section>
 
     <section class="detail-banner reveal" aria-label="Compromiso con el detalle"><picture><source type="image/avif" srcset="./assets/trabajos/muestra-detalle-costura-640.avif 640w, ./assets/trabajos/muestra-detalle-costura-800.avif 800w, ./assets/trabajos/muestra-detalle-costura-1200.avif 1200w" sizes="100vw"><source type="image/webp" srcset="./assets/trabajos/muestra-detalle-costura-640.webp 640w, ./assets/trabajos/muestra-detalle-costura-800.webp 800w, ./assets/trabajos/muestra-detalle-costura-1200.webp 1200w" sizes="100vw"><img src="./assets/trabajos/muestra-detalle-costura-640.webp" width="1200" height="1599" loading="lazy" decoding="async" alt="Macro de costura y textura de cuero automotriz"></picture><p>EL DETALLE NO ES UN EXTRA.<br><em>ES LA MEDIDA DE NUESTRO TRABAJO.</em></p></section>
@@ -461,8 +459,8 @@
   <div id="announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
   <script type="module" src="./js/app.js?v=31"></script>
   <script type="module" src="./js/hero.js?v=5"></script>
-  <script type="module" src="./js/intro.js?v=5"></script>
-  <script type="module" src="./js/secciones.js?v=17"></script>
+  <script type="module" src="./js/intro.js?v=6"></script>
+  <script type="module" src="./js/secciones.js?v=18"></script>
   <script type="module" src="./js/testimonios.js?v=1"></script>
   <script type="module" src="./js/galeria-esfera.js?v=4"></script>
   <script type="module" src="./js/elige-carro.js?v=12"></script>

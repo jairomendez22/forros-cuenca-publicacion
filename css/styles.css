@@ -672,16 +672,6 @@ a.catalog-button,.quote-button{animation:fc-latido 1.9s ease-in-out infinite,fc-
 :root{interpolate-size:allow-keywords}
 .services-list summary{grid-template-columns:1fr 48px}
 .service-dot{display:none}
-/* 2026-10-28: la descripción se cambió por una foto del servicio */
-.servicio-foto{margin:0 12px 26px;overflow:hidden;aspect-ratio:16/9;border:1px solid #ffffff14;border-radius:14px;background:#16171b}
-.servicio-foto img{display:block;width:100%;height:100%;object-fit:cover}
-.services-list details[open] .servicio-foto{animation:servicio-abre .38s cubic-bezier(.2,.75,.25,1) both}
-.services-list details[open] .servicio-foto img{animation:servicio-foto-entra .7s cubic-bezier(.2,.75,.25,1) both}
-@keyframes servicio-foto-entra{from{transform:scale(1.06)}to{transform:none}}
-.services-list details::details-content{block-size:0;overflow:hidden;transition:block-size .38s cubic-bezier(.2,.75,.25,1),content-visibility .38s allow-discrete}
-.services-list details[open]::details-content{block-size:auto}
-@keyframes servicio-abre{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.services-list details[open] :is(.servicio-foto,.servicio-foto img){animation:none}.services-list details::details-content{transition:none}}
 
 /* 2026-10-28 Reseñas en rompecabezas (reemplaza «Hecho para tu auto»): la sección mide casi 3 pantallas y el bloque
    queda fijo mientras las 6 piezas (rojo, negro y azul) llegan revueltas y encajan una por una siguiendo el scroll.
@@ -859,32 +849,6 @@ body{overflow-x:clip;overflow-y:visible}
 }
 @media (prefers-reduced-motion:reduce){.site-header .site-nav .animated-top-dock__item[data-dock-item]{transform:none!important}}
 
-/* 2026-10-29 ¿Qué tapizamos? con el dock Sable de ThreeUI en vertical (mismo resorte que el menú): cápsula de
-   vidrio oscuro, botones con letra Fragment Mono, el cercano al mouse crece y se corre al costado, el abierto
-   queda como chip claro. Reemplaza el recuadro rojo con brillo que viajaba al servicio abierto.
-   El botón (.servicio-boton) es una capa absoluta dentro de su fila de alto fijo y crece hacia arriba y abajo
-   sin mover la lista: si la lista creciera, cambiaría el alto de la sección y el controlador se reiniciaría en
-   cada cuadro (el mismo caso que advierte topDockController.ts con data-dock-frame). */
-.services-section .services-list.dock-servicios{display:grid;gap:4px;padding:6px;border:1px solid #292929;border-radius:16px;background:rgba(14,14,14,.86);box-shadow:0 12px 34px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.035);backdrop-filter:blur(18px) saturate(75%)}
-.services-section .dock-servicios details{border:0}
-.services-section .dock-servicios summary{position:relative;display:block;height:60px;min-height:0;padding:0;border:0;border-radius:11px;background:none;outline:none;cursor:pointer}
-.services-section .dock-servicios summary::after{display:none}
-.services-section .dock-servicios .servicio-boton{position:absolute;z-index:6;top:0;right:0;bottom:0;left:0;display:grid;grid-template-columns:1fr 30px;align-items:center;gap:12px;height:60px;margin-block:auto;padding:0 14px 0 18px;border:1px solid transparent;border-radius:11px;color:#858580;background:rgba(21,21,20,.9);transform-origin:0 50%;transition:color .15s,border-color .18s,background .18s,box-shadow .18s;will-change:height,transform}
-.services-section .dock-servicios .servicio-boton strong{justify-self:start;margin:0;padding:0;border-radius:0;background:none;color:inherit;font:400 clamp(12px,3.4vw,14px)/1.2 "ThreeUI Fragment Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}
-.services-section .dock-servicios .servicio-mas{position:relative;width:30px;height:30px;border:1px solid #41413e;border-radius:8px;background:rgba(27,27,26,.94);transition:border-color .18s,background .18s}
-/* 2026-10-30 Íconos Phosphor (MIT, © Phosphor Icons, vía Iconify): dos ph:minus-bold forman ph:plus-bold; al abrir,
-   la raya vertical se acuesta y queda ph:minus-bold (la «×» se leía como cerrar o borrar). Sin flechas, regla del dueño. */
-.services-section .dock-servicios .servicio-mas{--ph-minus:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath d='M228 128a12 12 0 0 1-12 12H40a12 12 0 0 1 0-24h176a12 12 0 0 1 12 12'/%3E%3C/svg%3E")}
-.services-section .dock-servicios .servicio-mas::before,.services-section .dock-servicios .servicio-mas::after{position:absolute;top:50%;left:50%;width:16px;height:16px;background:currentColor;content:"";-webkit-mask:var(--ph-minus) center/contain no-repeat;mask:var(--ph-minus) center/contain no-repeat;translate:-50% -50%;transition:rotate .18s ease}
-.services-section .dock-servicios .servicio-mas::after{rotate:90deg}
-.services-section .dock-servicios details[open] .servicio-mas::after{rotate:180deg}
-.services-section .dock-servicios :is(.servicio-boton[data-dock-near="true"],summary:hover .servicio-boton,summary:focus-visible .servicio-boton){z-index:7;color:#ecece8;border-color:#41413e;background:rgba(27,27,26,.94);box-shadow:0 7px 16px rgba(0,0,0,.26)}
-.services-section .dock-servicios details:not([open]) :is(summary:hover,summary:focus-visible) .servicio-mas{border-color:var(--red);background:var(--red);color:#fff}
-.services-section .dock-servicios summary:focus-visible .servicio-boton{outline:2px solid #fff;outline-offset:2px}
-.services-section .dock-servicios details[open] .servicio-boton{color:#111;border-color:#e8e8e3;background:#e8e8e3;box-shadow:0 7px 18px rgba(0,0,0,.28)}
-.services-section .dock-servicios details[open] .servicio-mas{border-color:#111;background:#111;color:#fff}
-.services-section .dock-servicios .servicio-foto{margin:6px 6px 10px;border-color:#292929;border-radius:11px}
-@media (prefers-reduced-motion:reduce){.services-section .dock-servicios .servicio-boton{transform:none!important}.services-section .dock-servicios .servicio-mas::after{transition:none}}
 
 /* 2026-10-29 Elige tu carro (idea de Katzkin «Choose your design», para carros de Ecuador): el cliente escoge
    su carro y un diseño, y ve una foto del asiento de ESE carro con ese forro. Lógica en js/elige-carro.js. */
@@ -938,3 +902,15 @@ body{overflow-x:clip;overflow-y:visible}
   .elige-selectores{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}.elige-selectores .vehicle-field:first-child{grid-column:1/-1}
 }
 @media (prefers-reduced-motion:reduce){.elige-capa{transition:none}}
+
+/* 2026-11-11 ¿Qué tapizamos?: los cuatro servicios a la vista a la vez, con su foto (decisión del dueño: nada de
+   acordeón con uno solo abierto). Una columna en celular, dos desde 560 px. */
+.services-section .servicios-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-bottom:0;padding:8px;border:1px solid #292929;border-radius:16px;background:rgba(14,14,14,.86);box-shadow:0 12px 34px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.035);list-style:none}
+.servicios-grid .servicio{min-width:0}
+.servicios-grid figure{display:flex;height:100%;margin:0;flex-direction:column;overflow:hidden;border:1px solid #292929;border-radius:11px;background:#151514}
+.servicios-grid picture{display:block;aspect-ratio:16/9;overflow:hidden;background:#16171b}
+.servicios-grid img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.75,.25,1)}
+.servicios-grid figcaption{padding:15px 16px 16px;color:#ecece8;font:400 clamp(12px,3.4vw,14px)/1.3 "ThreeUI Fragment Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}
+@media (min-width:560px){.services-section .servicios-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (hover:hover) and (pointer:fine){.servicios-grid .servicio:hover img{transform:scale(1.04)}}
+@media (prefers-reduced-motion:reduce){.servicios-grid img{transition:none}}

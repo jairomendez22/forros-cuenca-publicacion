@@ -149,13 +149,6 @@ if (menu) {
   porSeccion.forEach((_, seccion) => vigia.observe(seccion));
 }
 
-// ¿Qué tapizamos?: el mismo dock Sable en vertical (axis "y" del controlador): el botón cercano al mouse crece
-// en alto y se corre un poco al costado; el servicio abierto queda como chip claro (ver styles.css)
-const servicios = document.querySelector(".services-list.dock-servicios");
-if (servicios) {
-  createTopDockController(servicios, () => ({ proximity: 122, spring: 0.19, damping: 0.7, widthGrowth: 17, heightGrowth: 16, drop: 3.5, axis: "y", distribute: false, lockTrack: false }));
-}
-
 // Botones de cotizar: crecen un poco y se acercan al mouse a medida que se acerca (aumento por cercanía y botón magnético)
 if (window.matchMedia("(hover: hover) and (pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   const botones = [...document.querySelectorAll(".hero-primary, .header-quote, .quote-button, .closing-button, .map-link")];
@@ -244,13 +237,8 @@ if (animCintas.length && !sinMovimiento) {
 
 // WhatsApp que sabe dónde estás: el botón de abajo (celular) y el mensaje dicen lo que el cliente está viendo.
 const botonMovil = document.querySelector("#mobile-quote-button");
-const servicioAbierto = () => document.querySelector(".services-list details[open] summary strong")?.textContent.trim();
 const contextos = {
   trabajos: () => ({ etiqueta: "Cotizar un diseño como estos", interes: "un diseño de forro como los de la web" }),
-  servicios: () => {
-    const s = servicioAbierto();
-    return s ? { etiqueta: `Cotizar ${s.toLowerCase()}`, interes: s.toLowerCase() } : null;
-  },
   configurador: () => ({ etiqueta: "Cotizar mi diseño", interes: "" }),
   // Elige tu carro: el rótulo de la foto ya dice el carro y el diseño elegidos
   elige: () => {
@@ -278,6 +266,5 @@ if (botonMovil && "IntersectionObserver" in window) {
     aplicar();
   }, { rootMargin: "-45% 0px -45% 0px" });
   document.querySelectorAll("main section[id]").forEach((s) => vigiaSecciones.observe(s));
-  document.querySelectorAll(".services-list details").forEach((d) => d.addEventListener("toggle", aplicar));
   document.addEventListener("elige:cambio", aplicar);
 }

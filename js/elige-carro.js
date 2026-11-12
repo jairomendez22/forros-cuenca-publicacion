@@ -4,7 +4,7 @@
 // generación: investigacion-asientos/elige-carros → herramientas/fotos-elige.mjs → assets/elige/<id>/ y elige-datos.js.
 import { WHATSAPP_NUMBER } from "./data.js?v=9";
 import { VEHICLE_BRANDS, findBrand, modelYears } from "./vehicles.js";
-import { FOTOS } from "./elige-datos.js?v=7";
+import { FOTOS } from "./elige-datos.js?v=8";
 
 // Asientos de muestra sin carro ni marca (assets/elige/muestra/): nunca se muestra el interior de otra marca.
 const MUESTRA = { id: "muestra", marca: "", modelo: "asientos de muestra" };

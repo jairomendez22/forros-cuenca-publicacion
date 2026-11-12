@@ -1,10 +1,10 @@
 // Elige tu carro (idea del configurador de Katzkin, para carros de Ecuador): el cliente escoge marca, modelo y año
 // (los de vehicles.js) y ve el asiento de ESE carro con el forro puesto; al cambiar de diseño solo cambia el forro
-// (las 4 fotos de cada carro tienen el mismo encuadre). Fotos hechas con IA a partir de la investigación de cada
+// (las 6 fotos de cada carro tienen el mismo encuadre). Fotos hechas con IA a partir de la investigación de cada
 // generación: investigacion-asientos/elige-carros → herramientas/fotos-elige.mjs → assets/elige/<id>/ y elige-datos.js.
 import { WHATSAPP_NUMBER } from "./data.js?v=9";
 import { VEHICLE_BRANDS, findBrand, modelYears } from "./vehicles.js";
-import { FOTOS } from "./elige-datos.js?v=6";
+import { FOTOS } from "./elige-datos.js?v=7";
 
 // Asientos de muestra sin carro ni marca (assets/elige/muestra/): nunca se muestra el interior de otra marca.
 const MUESTRA = { id: "muestra", marca: "", modelo: "asientos de muestra" };
@@ -19,11 +19,14 @@ function fotoPara(marca, modelo, anio) {
   if (cercana) return { foto: cercana, nota: `Foto de referencia: ${modelo} ${cercana.desde}–${cercana.hasta ?? "hoy"}. Por WhatsApp confirmamos la forma de tu asiento.` };
   return { foto: MUESTRA, nota: `Pronto tendremos la foto del interior de tu ${marca} ${modelo}. Mientras, mira el diseño en asientos de muestra: tu forro se hace a la medida de tus asientos.` };
 }
+// Los 6 diseños del catálogo de Forros Cuenca (investigacion-asientos/elige-carros/_catalogo/), sin logo bordado.
 const DISENOS = [
-  { id: "negro-clasico", nombre: "Negro clásico", detalle: "Canales acolchados, costura negra", colores: ["#151518", "#2b2c31"] },
-  { id: "sport-rojo", nombre: "Sport rojo", detalle: "Centro perforado, costura y vivo rojos", colores: ["#151518", "#d0151d"] },
-  { id: "rombo-camel", nombre: "Rombo camel", detalle: "Centro en rombos color camel", colores: ["#151518", "#b07a45"] },
-  { id: "negro-gris", nombre: "Negro y gris", detalle: "Centro gris con franjas", colores: ["#151518", "#7d8087"] },
+  { id: "fc-16", nombre: "FC-16", detalle: "Centro en V con vivo blanco", colores: ["#151518", "#ececec"] },
+  { id: "fc-18", nombre: "FC-18", detalle: "Paneles en relieve, todo negro", colores: ["#151518", "#3a3b41"] },
+  { id: "fc-01", nombre: "FC-01", detalle: "Centro en V con vivo rojo", colores: ["#151518", "#d0151d"] },
+  { id: "fc-49", nombre: "FC-49", detalle: "Gris topo con vivo blanco", colores: ["#8b7b6e", "#ececec"] },
+  { id: "fc-21", nombre: "FC-21", detalle: "Franja central perforada en V", colores: ["#151518", "#55575e"] },
+  { id: "fc-02", nombre: "FC-02", detalle: "Camel con centro en rombos negro", colores: ["#c07a38", "#151518"] },
 ];
 
 const raiz = document.querySelector("[data-elige]");
@@ -89,7 +92,7 @@ if (raiz) {
     avif.srcset = f.avif;
     webp.srcset = f.webp;
     img.src = f.src;
-    img.alt = `${foto === MUESTRA ? "Asientos de muestra" : `Asientos delanteros de ${nombreCarro(foto)}`} con forro ${diseno.nombre.toLowerCase()}: ${diseno.detalle.toLowerCase()}`;
+    img.alt = `${foto === MUESTRA ? "Asientos de muestra" : `Asientos delanteros de ${nombreCarro(foto)}`} con forro ${diseno.nombre}: ${diseno.detalle.toLowerCase()}`;
     const fundir = () => {
       capas[visible].classList.remove("is-visible");
       siguiente.classList.add("is-visible");

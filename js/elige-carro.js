@@ -83,8 +83,12 @@ if (raiz) {
   selModelo.addEventListener("change", () => elegir({ modelo: selModelo.value }));
   selAnio.addEventListener("change", () => elegir({ anio: selAnio.value }));
 
-  // la foto nueva se carga en la capa oculta y recién entonces se funde sobre la anterior
+  // la foto nueva se carga en la capa oculta y recién entonces se funde sobre la anterior.
+  // `turno` evita que una foto pedida antes (y que llega tarde) cambie de capa otra vez: con conexión lenta y
+  // clics seguidos, dos fundidos para la misma capa desordenaban `visible` y la foto siguiente caía en la capa visible.
+  let turno = 0;
   const mostrar = () => {
+    const mio = ++turno;
     const f = fuentes(foto, diseno);
     const siguiente = capas[1 - visible];
     const [avif, webp] = siguiente.querySelectorAll("source");
@@ -94,6 +98,7 @@ if (raiz) {
     img.src = f.src;
     img.alt = `${foto === MUESTRA ? "Asientos de muestra" : `Asientos delanteros de ${nombreCarro(foto)}`} con forro ${diseno.nombre}: ${diseno.detalle.toLowerCase()}`;
     const fundir = () => {
+      if (mio !== turno) return;
       capas[visible].classList.remove("is-visible");
       siguiente.classList.add("is-visible");
       visible = 1 - visible;

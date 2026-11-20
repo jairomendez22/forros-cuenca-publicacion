@@ -1,0 +1,11 @@
+/* «Un estilo para cada vehículo»: muro de fotos que se recorre con el scroll (js/galeria-muro.js). 19-nov-2026.
+   La escena queda fija debajo del menú mientras dura el recorrido (como ScrollTrigger con «pin» y «scrub»);
+   bajar o subir mueve la cámara. Solo fotos: entre ellas se ve el papel de la sección. */
+.works-section{background:#efece6}
+.galeria-muro{--gm-top:var(--header-h,64px);position:relative;height:220svh;margin:34px calc(50% - 50vw) 0}
+@media (min-width:900px){.galeria-muro{--gm-top:86px}}
+.gm-escena{position:sticky;top:var(--gm-top);height:calc(100svh - var(--gm-top));overflow:hidden}
+.galeria-muro canvas{display:block;width:100%;height:100%}
+/* Movimiento reducido: sin tramo fijo; el muro queda quieto en la vista amplia. Va en el CSS (no con una clase
+   puesta por JS) para que valga desde la primera pintada: el sitio da a todo una transición mínima en este modo. */
+@media (prefers-reduced-motion:reduce){.galeria-muro{height:auto}.gm-escena{position:relative;top:0;height:clamp(420px,80svh,760px)}}

@@ -151,11 +151,6 @@ body{height:auto;min-height:100%;padding-top:var(--header-h);padding-bottom:calc
 .hero-slide.is-active{opacity:1;transform:scale(1)}
 .hero-carousel-ui{position:absolute;z-index:2;right:0;bottom:-8px;left:0;display:flex;flex-direction:column;align-items:center;gap:10px}
 
-.hero-dots{display:flex;gap:4px}
-.hero-dot{display:grid;width:28px;height:28px;padding:0;border:0;background:none;cursor:pointer;place-items:center}
-.hero-dot::before{width:8px;height:8px;border-radius:50%;background:#ffffff4d;transition:background .2s,width .2s;content:""}
-.hero-dot[aria-pressed="true"]::before{width:22px;border-radius:4px;background:#e50914}
-.hero-dot:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
 @media (prefers-reduced-motion:reduce){.hero-slide{transition:none;transform:none}}
 
 /* Difuminado en los cuatro bordes de cada foto (sin rectángulo visible) y ajustes móviles. */
@@ -218,8 +213,6 @@ button:disabled, select:disabled { cursor: default; }
   line-height: 1.5;
 }
 a.hero-link { border-color: #ffffff66; background: transparent; color: #fff; text-decoration: none; }
-.hero-dot { border-radius: 6px; }
-.hero-dot::before { transition: background-color 180ms ease, width 180ms ease; }
 
 .services-list summary::after {
   display: grid;
@@ -241,14 +234,13 @@ a.hero-link { border-color: #ffffff66; background: transparent; color: #fff; tex
   outline-offset: 3px;
 }
 :is(.tab, .zone-chip, .zone-detail-toggle, .text-button, .nav-toggle,
-  .hero-dot, .map-link, a.hero-link, .skip-link, .site-nav a, .site-footer a,
+  .map-link, a.hero-link, .skip-link, .site-nav a, .site-footer a,
   .services-copy > a, .privacy-note a, .services-list summary):focus-visible {
   background-color: var(--red);
   border-color: var(--red);
   color: #fff;
 }
 .zone-chip:focus-visible span { background-color: #101113; color: #fff; }
-.hero-dot:focus-visible::before { background-color: #fff; }
 .services-list summary:focus-visible::after { border-color: #fff; }
 .services-list summary:focus-visible .service-dot { background: #fff; box-shadow: none; }
 :is(.hero-primary, .header-quote, .quote-button, .closing-button, .mobile-bar .button-primary, .map-link.map-link):focus-visible {
@@ -267,14 +259,13 @@ a.hero-link { border-color: #ffffff66; background: transparent; color: #fff; tex
 
 @media (hover:hover) and (pointer:fine) {
   :is(.tab, .zone-chip, .zone-detail-toggle, .text-button, .nav-toggle,
-    .hero-dot, .map-link, a.hero-link, .skip-link, .site-nav a, .site-footer a,
+    .map-link, a.hero-link, .skip-link, .site-nav a, .site-footer a,
     .services-copy > a, .privacy-note a, .services-list summary):hover {
     background-color: var(--red);
     border-color: var(--red);
     color: #fff;
   }
   .zone-chip:hover span { background-color: #101113; color: #fff; }
-  .hero-dot:hover::before { background-color: #fff; }
   .services-list summary:hover::after { border-color: #fff; }
   .services-list summary:hover .service-dot { background: #fff; box-shadow: none; }
   :is(.hero-primary, .header-quote, .quote-button, .closing-button, .mobile-bar .button-primary, .map-link.map-link):hover {
@@ -290,7 +281,7 @@ a.hero-link { border-color: #ffffff66; background: transparent; color: #fff; tex
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :is(a[href], button, summary, [role="button"], select), .zone.zone, .hero-dot::before,
+  :is(a[href], button, summary, [role="button"], select), .zone.zone,
   .services-list summary::after { transition: none; }
   :is(.hero-primary, .header-quote, .quote-button, .closing-button, .mobile-bar .button-primary) {
     transform: none !important;
@@ -480,7 +471,6 @@ a[href]:not(.brand), .text-button { font-weight: 700; }
 /* 320 px: nada se sale de la pantalla. */
 .header-inner>*{min-width:0}
 .value-strip{flex-wrap:wrap;justify-content:center;padding-block:12px;row-gap:8px;white-space:normal}
-@media (max-width:399px){.hero-dots{gap:0}.hero-dot{width:24px}}
 @media (max-width:359px){.header-inner{padding-inline:8px;gap:4px}.brand-copy{display:none}}
 
 /* Títulos en varias líneas sin <br>. */

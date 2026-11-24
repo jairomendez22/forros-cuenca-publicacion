@@ -858,3 +858,8 @@ body{overflow-x:clip;overflow-y:visible}
 }
 @media (prefers-reduced-motion:reduce){.elige-capa{transition:none}}
 
+/* Franja v4 (23-nov-2026): logos sueltos sobre el fondo oscuro, sin tarjetas blancas, con separación pareja.
+   Los logos oscuros se pasaron a claro en los archivos; los rojos y el amarillo de marca se quedan. */
+.brand-item{width:auto;height:72px;border-radius:0;background:none;box-shadow:none}
+.brands-track{gap:48px;padding-right:48px;animation-duration:42s}
+@media (min-width:900px){.brand-item{width:auto;height:96px}.brands-track{gap:72px;padding-right:72px}}
